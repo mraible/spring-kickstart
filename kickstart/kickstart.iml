@@ -1,0 +1,30 @@
+<module relativePaths="false" type="J2EE_WEB_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <exclude-output></exclude-output>
+    <orderEntry type="inheritedJdk"></orderEntry>
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder isTestSource="false" url="file://$MODULE_DIR$/src/main/resources"/></content>
+    <orderEntry type="sourceFolder" forTests="false"></orderEntry>
+    <output url="file://$MODULE_DIR$/target/classes"/>
+    <output-test url="file://$MODULE_DIR$/target/test-classes"/>
+    <orderEntry type="module-library">
+      <library name="junit">
+        <CLASSES>
+          <root url="jar:///Users/trisberg/.m2/repository/junit/junit/3.8.1/junit-3.8.1.jar!/"/>
+        </CLASSES>
+        <JAVADOC/>
+        <SOURCES/>
+      </library>
+    </orderEntry>
+  </component>
+  <component name="ModuleRootManager"></component>
+  <component name="WebModuleBuildComponent">
+    <setting value="file://$MODULE_DIR$/target/kickstart" name="EXPLODED_URL"/>
+  </component>
+  <component name="WebModuleProperties">
+    <deploymentDescriptor url="file://$MODULE_DIR$/src/main/webapp/WEB-INF/web.xml" name="web.xml"/>
+    <webroots>
+      <root url="file://$MODULE_DIR$/src/main/webapp" relative="/"/>
+    </webroots>
+  </component>
+</module>
