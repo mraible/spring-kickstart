@@ -184,7 +184,7 @@
       <module fileurl="file://$PROJECT_DIR$/kickstart.iml" filepath="$PROJECT_DIR$/kickstart.iml" />
     </modules>
   </component>
-  <component name="ProjectRootManager" version="2" assert-keyword="false" jdk-15="false" project-jdk-name="java version 1.5.0_06" />
+  <component name="ProjectRootManager" version="2" assert-keyword="true" jdk-15="true" project-jdk-name="1.5" />
   <component name="RmicSettings">
     <option name="IS_EANABLED" value="false" />
     <option name="DEBUGGING_INFO" value="true" />
