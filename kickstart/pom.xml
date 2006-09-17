@@ -9,9 +9,22 @@
   <url>http://maven.apache.org</url>
   <repositories>
     <repository>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <id>central</id>
+      <name>Maven Repository Switchboard</name>
+      <url>http://repo1.maven.org/maven2</url>
+    </repository>
+    <repository>
       <id>springdeveloper</id>
       <name>springdeveloper repository</name>
       <url>http://repository.springdeveloper.com/maven2/</url>
+    </repository>
+    <repository>
+      <id>java.net</id>
+      <url>https://maven-repository.dev.java.net/nonav/repository</url>
+      <layout>legacy</layout>
     </repository>
   </repositories>
   <dependencies>
