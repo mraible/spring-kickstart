@@ -4,9 +4,6 @@
 
     <persistence-unit name="kickstart" transaction-type="RESOURCE_LOCAL">
 
-        <class>spring.kickstart.domain.Customer</class>
-        <exclude-unlisted-classes/>
-
     </persistence-unit>
 
 </persistence>

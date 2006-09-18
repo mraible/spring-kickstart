@@ -19,6 +19,14 @@
       <entry name=".+\.(properties|xml|html)" />
       <entry name=".+\.(gif|png|jpeg)" />
     </resourceExtensions>
+    <wildcardResourcePatterns>
+      <entry name="?*.properties" />
+      <entry name="?*.xml" />
+      <entry name="?*.html" />
+      <entry name="?*.gif" />
+      <entry name="?*.png" />
+      <entry name="?*.jpeg" />
+    </wildcardResourcePatterns>
   </component>
   <component name="DataSourceManager" />
   <component name="DataSourceManagerImpl" />

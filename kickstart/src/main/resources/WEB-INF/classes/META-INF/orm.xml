@@ -7,4 +7,9 @@
 
     <package>spring.kickstart.domain</package>
 
+    <entity class="Customer" metadata-complete="false" access="FIELD"/>
+    <entity class="Order" metadata-complete="false" access="FIELD"/>
+    <entity class="OrderItem" metadata-complete="false" access="FIELD"/>
+    <entity class="Product" metadata-complete="false" access="FIELD"/>
+
 </entity-mappings>
