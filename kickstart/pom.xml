@@ -5,7 +5,7 @@
   <artifactId>kickstart</artifactId>
   <packaging>war</packaging>
   <version>1.0-SNAPSHOT</version>
-  <name>Maven Webapp Archetype</name>
+  <name>Spring 2.0 Kickstart</name>
   <url>http://maven.apache.org</url>
   <repositories>
     <repository>
@@ -78,9 +78,9 @@
        </plugin>
        <plugin>
            <groupId>org.mortbay.jetty</groupId>
-           <artifactId>maven-jetty6-plugin</artifactId>
+           <artifactId>maven-jetty-plugin</artifactId>
            <configuration>
-               <scanIntervalSeconds>10</scanIntervalSeconds>
+               <scanIntervalSeconds>3</scanIntervalSeconds>
                <contextPath>/</contextPath>
            </configuration>
        </plugin>
