@@ -15,12 +15,13 @@
         </property>
     </bean>
 
-    <bean id="customerRepository" class="spring.kickstart.repository.CustomerRepositoryImpl" autowire="byName"/>
+    <bean id="customerRepository" class="spring.kickstart.repository.CustomerRepositoryImpl"/>
 
-    <bean id="orderRepository" class="spring.kickstart.repository.OrderRepositoryImpl" autowire="byName"/>
+    <bean id="orderRepository" class="spring.kickstart.repository.OrderRepositoryImpl"/>
 
-    <bean
-        class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
+    <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
+
+    <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
 
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory"

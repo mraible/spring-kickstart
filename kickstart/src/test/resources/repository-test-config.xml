@@ -15,14 +15,17 @@
         </property>
     </bean>
 
-    <bean id="customerRepository" class="spring.kickstart.repository.CustomerRepositoryImpl" autowire="byName"/>
+    <bean id="customerRepository" class="spring.kickstart.repository.CustomerRepositoryImpl"/>
 
-    <bean id="orderRepository" class="spring.kickstart.repository.OrderRepositoryImpl" autowire="byName"/>
+    <bean id="orderRepository" class="spring.kickstart.repository.OrderRepositoryImpl"/>
 
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory"
             ref="entityManagerFactory" />
     </bean>
+
+    <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
+    <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
 
     <tx:annotation-driven />
 
@@ -31,9 +34,9 @@
         <property name="persistenceUnitName" value="kickstart"/>
         <property name="jpaVendorAdapter">
           <bean class="org.springframework.orm.jpa.vendor.TopLinkJpaVendorAdapter">
-             <property name="showSql" value="false"/>
-             <property name="generateDdl" value="false"/>
-             <property name="databasePlatform" value="Derby"/>
+             <property name="showSql" value="true"/>
+             <property name="generateDdl" value="true"/>
+             <property name="databasePlatform" value="HSQL"/>
           </bean>
         </property>
         <property name="loadTimeWeaver">

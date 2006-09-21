@@ -27,10 +27,10 @@ public class OrderRepositoryImpl implements OrderRepository {
 
 
     public Order findById(Long id) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return em.find(Order.class, id);
     }
 
     public List<Order> findAll() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return em.createQuery("select o from Order o").getResultList();
     }
 }

@@ -27,14 +27,15 @@ public class CustomerRepositoryImpl implements CustomerRepository {
 
 
     public Customer findById(Long id) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return em.find(Customer.class,id);
     }
 
     public void add(Customer customer) {
-        //To change body of implemented methods use File | Settings | File Templates.
+        em.persist(customer);
     }
 
     public List<Customer> findAll() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return em.createQuery("select c from Customer c")
+                .getResultList();
     }
 }
