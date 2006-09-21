@@ -19,9 +19,6 @@
 
     <bean id="orderRepository" class="spring.kickstart.repository.OrderRepositoryImpl" autowire="byName"/>
 
-    <bean
-        class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
-
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory"
             ref="entityManagerFactory" />
