@@ -1,6 +1,7 @@
 package spring.kickstart.domain;
 
 import javax.persistence.*;
+import static javax.persistence.GenerationType.*;
 import java.util.List;
 
 /**
@@ -10,7 +11,7 @@ import java.util.List;
 @Table(name = "orders") // ORDER is a reserved word in most, if not all, SQL databases - used with ORDER BY
 public class Order {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = AUTO)
     private Long id;
     @OneToMany(mappedBy = "order")
     @OrderBy("lineNo")

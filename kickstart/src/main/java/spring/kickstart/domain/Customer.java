@@ -1,6 +1,8 @@
 package spring.kickstart.domain;
 
 import javax.persistence.*;
+import static javax.persistence.TemporalType.*;
+import static javax.persistence.GenerationType.*;
 import java.util.Date;
 import java.util.Set;
 
@@ -11,10 +13,10 @@ import java.util.Set;
 @Entity
 public class Customer {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = AUTO)
     private Long id;
     private String name;
-    @Temporal(TemporalType.DATE) private Date customerSince;
+    @Temporal(DATE) private Date customerSince;
     @OneToMany Set<Order> orders;
 
     public Long getId() {

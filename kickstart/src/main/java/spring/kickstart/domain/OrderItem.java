@@ -4,13 +4,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.GenerationType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import static javax.persistence.GenerationType.*;
 
 /**
  * @author trisberg
  */
 public class OrderItem {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = AUTO)
     private Long id;
     int lineNo;
     @ManyToOne Order order;
