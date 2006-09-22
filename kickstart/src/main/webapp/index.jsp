@@ -4,7 +4,7 @@
 
 <p>
     This application was created by <a href="http://jroller.com/page/buggybean">Thomas Risberg</a>
-    and <a href="http://raibledesigns.com">Matt Raible's</a> for their <strong>Spring 2.0 Kickstart</strong>
+    and <a href="http://raibledesigns.com">Matt Raible</a> for their <strong>Spring 2.0 Kickstart</strong>
     presentation at <a href="http://springforward2006.com">Spring Forward 2006</a>.  
     <br/><br/>
 	Click on the button below to view the current list of customers.
