@@ -6,6 +6,7 @@ import static javax.persistence.GenerationType.AUTO;
 import static javax.persistence.TemporalType.DATE;
 import java.util.Collection;
 import java.util.Date;
+import java.util.LinkedHashMap;
 
 /**
  * @author trisberg
@@ -62,5 +63,16 @@ public class Customer {
 
     public void setOrders(Collection<Order> orders) {
         this.orders = orders;
+    }
+
+    @Override
+    public String toString() {
+        return Customer.class.getSimpleName() + new LinkedHashMap<String, Object>() {
+            {
+                put("id", id);
+                put("name", name);
+                put("customerSince", customerSince);
+            }
+        };
     }
 }
