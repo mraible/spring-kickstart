@@ -1,22 +1,20 @@
 package spring.kickstart.repository;
 
-import spring.kickstart.domain.Order;
-
-import java.util.List;
-
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+import spring.kickstart.domain.Product;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 
 /**
  * @author trisberg
  */
 @Repository
 @Transactional(propagation = Propagation.SUPPORTS)
-public class OrderRepositoryImpl implements OrderRepository {
+public class ProductRepositoryImpl implements ProductRepository {
 
     private EntityManager em;
 
@@ -26,11 +24,15 @@ public class OrderRepositoryImpl implements OrderRepository {
     }
 
 
-    public Order findById(Long id) {
-        return em.find(Order.class, id);
+    public Product findById(Long id) {
+        return em.find(Product.class, id);
     }
 
-    public List<Order> findAll() {
-        return em.createQuery("select o from Order o").getResultList();
+    public void add(Product p) {
+        em.persist(p);
+    }
+
+    public List<Product> findAll() {
+        return em.createQuery("select p from Product p").getResultList();
     }
 }

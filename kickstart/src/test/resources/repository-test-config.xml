@@ -17,7 +17,7 @@
 
     <bean id="customerRepository" class="spring.kickstart.repository.CustomerRepositoryImpl"/>
 
-    <bean id="orderRepository" class="spring.kickstart.repository.OrderRepositoryImpl"/>
+    <bean id="orderRepository" class="spring.kickstart.repository.ProductRepositoryImpl"/>
 
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory"

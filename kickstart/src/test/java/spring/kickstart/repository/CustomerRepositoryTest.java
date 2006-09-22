@@ -1,10 +1,12 @@
 package spring.kickstart.repository;
 
 import org.springframework.test.jpa.AbstractJpaTests;
-import org.springframework.jdbc.core.JdbcTemplate;
 import spring.kickstart.domain.Customer;
+import spring.kickstart.domain.Order;
+import spring.kickstart.domain.Product;
+import spring.kickstart.domain.OrderItem;
 
-import javax.sql.DataSource;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -14,9 +16,14 @@ import java.util.List;
 public class CustomerRepositoryTest extends AbstractJpaTests {
 
     private CustomerRepository customerRepository;
+    private ProductRepository productRepository;
 
     public void setCustomerRepository(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
+    }
+
+    public void setProductRepository(ProductRepository productRepository) {
+        this.productRepository = productRepository;
     }
 
     protected String[] getConfigLocations() {
@@ -25,9 +32,25 @@ public class CustomerRepositoryTest extends AbstractJpaTests {
 
     protected void onSetUpInTransaction() throws Exception {
 
+        Product p1 = new Product();
+        p1.setDescription("Product1");
+        productRepository.add(p1);
+
         Customer c = new Customer();
         c.setName("Test");
         c.setCustomerSince(new Date());
+        Order o1 = new Order();
+        OrderItem oi1 = new OrderItem();
+        oi1.setLineNo(1);
+        oi1.setOrder(o1);
+        oi1.setProduct(p1);
+        List ois = new ArrayList();
+        ois.add(oi1);
+        o1.setOrderItems(ois);
+        List os = new ArrayList();
+        os.add(o1);
+        c.setOrders(os);
+
         customerRepository.add(c);
 
         super.onSetUpInTransaction();
@@ -38,8 +61,15 @@ public class CustomerRepositoryTest extends AbstractJpaTests {
         c.setName("New");
         c.setCustomerSince(new Date());
         customerRepository.add(c);
-        List l = customerRepository.findAll();
+        List<Customer> l = customerRepository.findAll();
         assertTrue(l.size() == 2);
+        Customer c1 = l.get(0);
+        System.out.println("******> " + c1.getId());
+        System.out.println("******> " + c1.getName());
+        System.out.println("******> " + c1.getOrders());
+        if (c1.getOrders().size() > 0) {
+            System.out.println("******> " + c1.getOrders().toArray());
+        }
     }
 
     public void testRetreiveCustomer() {

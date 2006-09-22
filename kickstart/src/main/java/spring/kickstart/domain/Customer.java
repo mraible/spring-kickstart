@@ -1,10 +1,11 @@
 package spring.kickstart.domain;
 
+import static javax.persistence.CascadeType.ALL;
 import javax.persistence.*;
-import static javax.persistence.TemporalType.*;
-import static javax.persistence.GenerationType.*;
+import static javax.persistence.GenerationType.AUTO;
+import static javax.persistence.TemporalType.DATE;
+import java.util.Collection;
 import java.util.Date;
-import java.util.Set;
 
 /**
  * @author trisberg
@@ -15,9 +16,13 @@ public class Customer {
     @Id
     @GeneratedValue(strategy = AUTO)
     private Long id;
+
     private String name;
+
     @Temporal(DATE) private Date customerSince;
-    @OneToMany Set<Order> orders;
+
+    @OneToMany(mappedBy = "customer", cascade = ALL)
+    Collection<Order> orders;
 
     public Customer() {}
 
@@ -26,7 +31,7 @@ public class Customer {
         this.name = name;
         this.customerSince = customerSince;
     }
-    
+
     public Long getId() {
         return id;
     }
@@ -51,11 +56,11 @@ public class Customer {
         this.customerSince = customerSince;
     }
 
-    public Set<Order> getOrders() {
+    public Collection<Order> getOrders() {
         return orders;
     }
 
-    public void setOrders(Set<Order> orders) {
+    public void setOrders(Collection<Order> orders) {
         this.orders = orders;
     }
 }

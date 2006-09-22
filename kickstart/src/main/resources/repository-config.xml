@@ -17,7 +17,7 @@
 
     <bean id="customerRepository" class="spring.kickstart.repository.CustomerRepositoryImpl"/>
 
-    <bean id="orderRepository" class="spring.kickstart.repository.OrderRepositoryImpl"/>
+    <bean id="orderRepository" class="spring.kickstart.repository.ProductRepositoryImpl"/>
 
     <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
 
