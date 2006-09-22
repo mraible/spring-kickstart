@@ -19,6 +19,14 @@ public class Customer {
     @Temporal(DATE) private Date customerSince;
     @OneToMany Set<Order> orders;
 
+    public Customer() {}
+
+    public Customer(Long id, String name, Date customerSince) {
+        this.id = id;
+        this.name = name;
+        this.customerSince = customerSince;
+    }
+    
     public Long getId() {
         return id;
     }
@@ -43,4 +51,11 @@ public class Customer {
         this.customerSince = customerSince;
     }
 
+    public Set<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Set<Order> orders) {
+        this.orders = orders;
+    }
 }

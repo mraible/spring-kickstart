@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+      http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+    <bean name="/customers.htm" class="spring.kickstart.web.CustomerController">
+        <property name="customerService" ref="customerService"/>
+    </bean>
+
+    <bean name="/customerform.htm" class="spring.kickstart.web.CustomerFormController">
+        <constructor-arg ref="customerService"/>
+        <property name="successView" value="redirect:customers.htm"/> 
+        <property name="cancelView" value="redirect:customers.htm"/>
+        <property name="validator">
+            <bean class="spring.kickstart.web.CustomerValidator">
+                <property name="messageSource" ref="messageSource"/>
+            </bean>
+        </property>
+    </bean>
+
+    <!-- View Resolver for JSPs -->
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="prefix" value="/WEB-INF/pages/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basename" value="messages"/>
+        <property name="useCodeAsDefaultMessage" value="true"/> 
+    </bean>
+
+    <bean id="customerService" class="spring.kickstart.domain.CustomerServiceMock"/>
+</beans>
