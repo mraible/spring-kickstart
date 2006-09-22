@@ -10,7 +10,7 @@
     <link rel="shortcut icon" href="${ctx}/favicon.ico" type="image/x-icon"/>
     <script type="text/javascript" src="${ctx}/scripts/global.js"></script>
     <style type="text/css" media="screen,print">
-        @import url(../styles/deliciouslyblue/theme.css);
+        @import url(${ctx}/styles/deliciouslyblue/theme.css);
     </style>
     <sm:head/>
 </head>
@@ -52,7 +52,7 @@ width="125" height="66" alt="Spring Framework"/></a>
                 <li><a href="http://springmodules.dev.java.net">Spring Modules</a></li>
             </ul>
 
-            <img src="../images/image.gif" alt="Right Align" width="150" height="112" class="right" style="margin: 10px 0 20px 0"/>
+            <img src="${ctx}/images/image.gif" alt="Right Align" width="150" height="112" class="right" style="margin: 10px 0 20px 0"/>
         </div>
 
         <div id="nav">

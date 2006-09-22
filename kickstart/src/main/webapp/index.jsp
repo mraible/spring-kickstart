@@ -1,3 +1,5 @@
+<%@ include file="/taglibs.jsp" %>
+
 <h2>Spring 2.0 Kickstart Sample Application</h2>
 
 <p>
