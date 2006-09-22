@@ -10,7 +10,7 @@
 	Click on the button below to view the current list of customers.
 </p>
 
-<p><button class="button" onclick="location.href='customers.htm'" style="width: 120px">View Customers</a></p>
+<p><button class="button" onclick="location.href='customers.htm'" style="width: 120px">View Customers</button></p>
 
 <div style="text-align: center; margin: 40px 0 20px 0">
     <a href="http://springforward2006.com">

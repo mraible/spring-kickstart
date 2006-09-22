@@ -6,7 +6,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
     <title><sm:title default="Welcome"/> | Spring 2.0 Kickstart</title>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
     <link rel="shortcut icon" href="${ctx}/favicon.ico" type="image/x-icon"/>
     <script type="text/javascript" src="${ctx}/scripts/global.js"></script>
     <style type="text/css" media="screen,print">
