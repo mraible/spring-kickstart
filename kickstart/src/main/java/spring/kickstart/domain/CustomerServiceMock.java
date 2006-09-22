@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.LinkedHashSet;
+import java.util.Collection;
 
 /**
  * @author mraible
@@ -39,7 +40,7 @@ public class CustomerServiceMock implements CustomerService {
         order.setId(2L);
         order.setOrderItems(orderItems);
 
-        Set<Order> orders = new LinkedHashSet<Order>();
+        Collection<Order> orders = new ArrayList<Order>();
         orders.add(order);
 
         c1.setOrders(orders);
