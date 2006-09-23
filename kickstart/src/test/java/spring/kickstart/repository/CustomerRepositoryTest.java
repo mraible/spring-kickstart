@@ -40,7 +40,8 @@ public class CustomerRepositoryTest extends AbstractJpaTests {
 
     protected void onSetUpInTransaction() throws Exception {
 
-        EntityManager em = EntityManagerFactoryUtils.getTransactionalEntityManager(emf);
+        EntityManager em =
+                EntityManagerFactoryUtils.getTransactionalEntityManager(emf);
 
         Product p1 = new Product();
         p1.setDescription("Product1");

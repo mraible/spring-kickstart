@@ -39,6 +39,10 @@ public class Order {
         this.customer = customer;
     }
 
+    public void cancel() {
+        this.status = OrderStatus.CANCELLED;    
+    }
+
     public Long getId() {
         return id;
     }

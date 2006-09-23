@@ -97,7 +97,7 @@ public class CustomerServiceIntegrationTest extends AbstractJpaTests {
         Order o = (Order) c.getOrders().toArray()[0];
         assertEquals(OrderStatus.PENDING, o.getStatus());
 
-        o.setStatus(OrderStatus.CANCELLED);
+        o.cancel();
         c = customerService.updateCustomer(c);
         c = null;
 
