@@ -1,10 +1,13 @@
 package spring.kickstart.domain;
 
 import org.springframework.test.jpa.AbstractJpaTests;
+import org.springframework.orm.jpa.EntityManagerFactoryUtils;
 import spring.kickstart.domain.*;
 import spring.kickstart.repository.CustomerRepository;
 import spring.kickstart.repository.ProductRepository;
 
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -14,17 +17,12 @@ import java.util.List;
  */
 public class CustomerServiceIntegrationTest extends AbstractJpaTests {
 
-    private CustomerRepository customerRepository;
-    private ProductRepository productRepository;
+    private EntityManagerFactory emf;
     private CustomerService customerService;
     private Long testId;
 
-    public void setCustomerRepository(CustomerRepository customerRepository) {
-        this.customerRepository = customerRepository;
-    }
-
-    public void setProductRepository(ProductRepository productRepository) {
-        this.productRepository = productRepository;
+    public void setEntityManagerFactory(EntityManagerFactory emf) {
+        this.emf = emf;
     }
 
     public void setCustomerService(CustomerService customerService) {
@@ -35,19 +33,14 @@ public class CustomerServiceIntegrationTest extends AbstractJpaTests {
         return new String[] {"service-test-config.xml"};
     }
 
-/*
-    @Override
-    protected void onSetUpBeforeTransaction() throws Exception {
-        setDefaultRollback(false);
-    }
-*/
-
     @Override
     protected void onSetUpInTransaction() throws Exception {
 
+        EntityManager em = EntityManagerFactoryUtils.getTransactionalEntityManager(emf);
+
         Product p1 = new Product();
         p1.setDescription("Product1");
-        productRepository.add(p1);
+        em.persist(p1);
 
         Customer c = new Customer();
         c.setName("Test");
@@ -66,7 +59,7 @@ public class CustomerServiceIntegrationTest extends AbstractJpaTests {
         os.add(o1);
         c.setOrders(os);
 
-        customerRepository.add(c);
+        em.persist(c);
         testId = c.getId();
 
         super.onSetUpInTransaction();

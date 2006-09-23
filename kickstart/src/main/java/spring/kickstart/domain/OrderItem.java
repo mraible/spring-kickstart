@@ -1,14 +1,12 @@
 package spring.kickstart.domain;
 
-import javax.persistence.ManyToOne;
-import javax.persistence.GenerationType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import static javax.persistence.GenerationType.*;
 
 /**
  * @author trisberg
  */
+@Entity
 public class OrderItem {
     @Id
     @GeneratedValue(strategy = AUTO)

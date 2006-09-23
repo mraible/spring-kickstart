@@ -1,11 +1,14 @@
 package spring.kickstart.repository;
 
 import org.springframework.test.jpa.AbstractJpaTests;
+import org.springframework.orm.jpa.EntityManagerFactoryUtils;
 import spring.kickstart.domain.Customer;
 import spring.kickstart.domain.Order;
 import spring.kickstart.domain.Product;
 import spring.kickstart.domain.OrderItem;
 
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -17,6 +20,7 @@ public class CustomerRepositoryTest extends AbstractJpaTests {
 
     private CustomerRepository customerRepository;
     private ProductRepository productRepository;
+    private EntityManagerFactory emf;
 
     public void setCustomerRepository(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
@@ -26,15 +30,21 @@ public class CustomerRepositoryTest extends AbstractJpaTests {
         this.productRepository = productRepository;
     }
 
+    public void setEntityManagerFactory(EntityManagerFactory emf) {
+        this.emf = emf;
+    }
+
     protected String[] getConfigLocations() {
         return new String[] {"repository-test-config.xml"};
     }
 
     protected void onSetUpInTransaction() throws Exception {
 
+        EntityManager em = EntityManagerFactoryUtils.getTransactionalEntityManager(emf);
+
         Product p1 = new Product();
         p1.setDescription("Product1");
-        productRepository.add(p1);
+        em.persist(p1);
 
         Customer c = new Customer();
         c.setName("Test");
@@ -51,7 +61,7 @@ public class CustomerRepositoryTest extends AbstractJpaTests {
         os.add(o1);
         c.setOrders(os);
 
-        customerRepository.add(c);
+        em.persist(c);
 
         super.onSetUpInTransaction();
     }

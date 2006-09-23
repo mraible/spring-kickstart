@@ -3,9 +3,18 @@
              xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd" version="1.0">
 
     <persistence-unit name="kickstart" transaction-type="RESOURCE_LOCAL">
+      <class>spring.kickstart.domain.Customer</class>
+      <class>spring.kickstart.domain.Order</class>
+      <class>spring.kickstart.domain.OrderItem</class>
+      <class>spring.kickstart.domain.Product</class>
     </persistence-unit>
 
     <persistence-unit name="kickstart2" transaction-type="RESOURCE_LOCAL">
+      <class>spring.kickstart.domain.Customer</class>
+      <class>spring.kickstart.domain.Order</class>
+      <class>spring.kickstart.domain.OrderItem</class>
+      <class>spring.kickstart.domain.Product</class>
+      <exclude-unlisted-classes/>
     </persistence-unit>
 
 </persistence>
