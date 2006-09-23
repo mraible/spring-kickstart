@@ -23,9 +23,14 @@ public class CustomerServiceImpl implements CustomerService {
         return customerRepository.findById(id);
     }
 
-    //@Transactional(propagation = Propagation.REQUIRED)
+    @Transactional(propagation = Propagation.REQUIRED)
     public void addNewCustomer(Customer customer) {
         customerRepository.add(customer);
+    }
+
+    @Transactional(propagation = Propagation.REQUIRED)
+    public Customer updateCustomer(Customer customer) {
+        return customerRepository.merge(customer);
     }
 
     public List<Customer> getListOfCustomers() {

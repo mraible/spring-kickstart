@@ -11,6 +11,8 @@ public interface CustomerService {
 
     void addNewCustomer(Customer customer);
 
+    Customer updateCustomer(Customer customer);
+
     public List<Customer> getListOfCustomers();
     
 }

@@ -34,6 +34,10 @@ public class CustomerRepositoryImpl implements CustomerRepository {
         em.persist(customer);
     }
 
+    public Customer merge(Customer customer) {
+        return em.merge(customer);
+    }
+
     public List<Customer> findAll() {
         return em.createQuery("select c from Customer c")
                 .getResultList();

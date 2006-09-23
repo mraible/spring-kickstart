@@ -45,9 +45,7 @@ public class CustomerServiceIntegrationTest extends AbstractJpaTests {
         Customer c = new Customer();
         c.setName("Test");
         c.setCustomerSince(new Date());
-        Order o1 = new Order();
-        o1.setOrderDate(new Date());
-        o1.setCustomer(c);
+        Order o1 = new Order(c);
         OrderItem oi1 = new OrderItem();
         oi1.setLineNo(1);
         oi1.setOrder(o1);
@@ -89,6 +87,26 @@ public class CustomerServiceIntegrationTest extends AbstractJpaTests {
         Customer c = customerService.locateCustomerById(testId);
         assertTrue("Test".equals(c.getName()));
         assertTrue(c.getOrders().size() > 0);
+    }
+
+    public void testModifyExistingCustomer() {
+
+        Customer c = customerService.locateCustomerById(testId);
+        assertTrue("Test".equals(c.getName()));
+        assertTrue(c.getOrders().size() > 0);
+        Order o = (Order) c.getOrders().toArray()[0];
+        assertEquals(OrderStatus.PENDING, o.getStatus());
+
+        o.setStatus(OrderStatus.CANCELLED);
+        c = customerService.updateCustomer(c);
+        c = null;
+
+        Customer c2 = customerService.locateCustomerById(testId);
+        assertTrue("Test".equals(c2.getName()));
+        assertTrue(c2.getOrders().size() > 0);
+        Order o2 = (Order) c2.getOrders().toArray()[0];
+        assertEquals(OrderStatus.CANCELLED, o2.getStatus());
+
     }
 
 }

@@ -13,5 +13,7 @@ public interface CustomerRepository {
 
     void add(Customer customer);
 
+    Customer merge(Customer customer);
+
     List<Customer> findAll();
 }

@@ -54,6 +54,10 @@ public class CustomerServiceMock implements CustomerService {
     public void addNewCustomer(Customer customer) {
     }
 
+    public Customer updateCustomer(Customer customer) {
+        return customer;
+    }
+
     public List<Customer> getListOfCustomers() {
         return new ArrayList<Customer>(repository.values());
     }
