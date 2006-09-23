@@ -63,13 +63,6 @@ public class CustomerRepositoryTest extends AbstractJpaTests {
         customerRepository.add(c);
         List<Customer> l = customerRepository.findAll();
         assertTrue(l.size() == 2);
-        Customer c1 = l.get(0);
-        System.out.println("******> " + c1.getId());
-        System.out.println("******> " + c1.getName());
-        System.out.println("******> " + c1.getOrders());
-        if (c1.getOrders().size() > 0) {
-            System.out.println("******> " + c1.getOrders().toArray());
-        }
     }
 
     public void testRetreiveCustomer() {

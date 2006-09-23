@@ -1,15 +1,10 @@
 package spring.kickstart.domain;
 
-import oracle.toplink.essentials.sessions.Project;
-
 import java.util.List;
 import java.util.Map;
 import java.util.LinkedHashMap;
 import java.util.Date;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.LinkedHashSet;
 import java.util.Collection;
 
 /**
@@ -54,6 +49,9 @@ public class CustomerServiceMock implements CustomerService {
 
     public Customer locateCustomerById(Long id) {
         return repository.get(id);
+    }
+
+    public void addNewCustomer(Customer customer) {
     }
 
     public List<Customer> getListOfCustomers() {
