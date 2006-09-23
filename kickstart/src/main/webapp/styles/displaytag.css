@@ -47,11 +47,6 @@ th.sorted a, th.sortable a {
     background-image: url(../images/arrow_up.png) !important;
 }
 
-.table th a {
-    background: transparent;
-    color: #2763A5;
-}
-
 .table th.sorted {
     background-color: #ffd;
     color: #000000;

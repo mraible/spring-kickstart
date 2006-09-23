@@ -13,7 +13,7 @@ div#page {
     color: #666666;
     background-color: #FFFFFF;
     padding-bottom: 10px;
-    border-bottom: 2px solid #2763A5;
+    border-bottom: 2px solid #008000;
 }
 
 div#content {
@@ -30,7 +30,7 @@ div#header h1 {
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     font-weight: normal;
     font-size: 32px;
-    color: #6DA6E2;
+    color: #7bb04d;
     margin-bottom: 16px;
     background-color: #FFFFFF;
 }
@@ -52,7 +52,7 @@ div#main h3 {
 }
 
 a, a:visited {
-    color: #6DA6E2;
+    color: #65d039;
     background-color: #FFFFFF;
     text-decoration: none;
     font-weight: bold;
@@ -93,9 +93,9 @@ img.right {
 /**************** form styles ****************/
 .button, button {
     padding: 2px;
-    background-color: #6DA6E2;
-    color: #FFFFFF;
-    border: 1px solid #2763A5;
+    background-color: #87B95B;
+    color: #fff;
+    border: 1px solid #008000;
     font-size: 11px;
 }
 
@@ -131,7 +131,7 @@ div#nav {
     width: 750px;
     font-size: 93%;
     padding-bottom: 1px;
-    border-bottom: 4px solid #2763A5;
+    border-bottom: 4px solid #008000;
     line-height: normal;
 }
 
@@ -160,7 +160,7 @@ div#nav a span {
     display: block;
     background: url( images/tabright10.gif ) no-repeat right top;
     padding: 3px 15px 3px 6px;
-    color: #FFF;
+    color: #fff;
 }
 
 /**************** content styles ****************/
@@ -209,7 +209,7 @@ div#footer {
     padding-right: 5px;
     clear: both;
     width: 742px;
-    background-color: #2763A5;
+    background-color: #008000;
 }
 
 div#footer p {
@@ -219,8 +219,8 @@ div#footer p {
 }
 
 div#footer p a {
+    background-color: #008000;
     color: #FFFFFF;
-    background-color: #2763A5;
     font-weight: 100;
     border-bottom: 1px dotted #FFFFFF;
 }

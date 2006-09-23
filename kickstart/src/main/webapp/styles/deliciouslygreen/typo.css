@@ -179,7 +179,7 @@
 
             .table {
                 border-collapse: collapse;
-                border: 2px solid #74B3DC;
+                border: 2px #87B95B solid;
                 color: #000;
                 background: #fff;
                 width: 100%;
@@ -201,11 +201,11 @@
                     text-align: left;
                     font-size: 1em;
                     font-weight: bold;
-                    background: #d7e9f5;
-                }
+                    background: #C9FF94;
+                 }
 								        .table th a {
 								            background: transparent;
-								            color: #2763A5;
+								            color: #008000;
 								        }
                 .table tfoot th, tfoot td {
                     border: 1px solid #e0e0e0;
@@ -224,12 +224,7 @@
                     background: transparent;
                     text-decoration: underline;
                 }
-                .table tbody th a {
-                    background: transparent;
-                    text-decoration: underline;
-                    font-weight: bold;
-                }
-                .table tbody th, .table tbody td {
+                .table tbody td {
                     text-align: left;
                 }
                 .table tfoot td {

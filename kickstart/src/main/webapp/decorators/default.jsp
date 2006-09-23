@@ -9,7 +9,7 @@
     <link rel="shortcut icon" href="${ctx}/favicon.ico" type="image/x-icon"/>
     <script type="text/javascript" src="${ctx}/scripts/global.js"></script>
     <style type="text/css" media="screen,print">
-        @import url(${ctx}/styles/deliciouslyblue/theme.css);
+        @import url(${ctx}/styles/deliciously${cssTheme}/theme.css);
     </style>
     <sm:head/>
 </head>
@@ -23,7 +23,7 @@
 
         <div id="branding"><a href="http://www.springframework.org/"
 title="Spring - java/j2ee Application Framework"><img
-src="http://www.springframework.org/buttons/powered-by-spring_large.png"
+src="${ctx}/images/powered-by-spring.png"
 width="125" height="66" alt="Spring Framework"/></a>
         </div>
 
@@ -51,7 +51,8 @@ width="125" height="66" alt="Spring Framework"/></a>
                 <li><a href="http://springmodules.dev.java.net">Spring Modules</a></li>
             </ul>
 
-            <img src="${ctx}/images/image.gif" alt="Right Align" width="150" height="112" class="right" style="margin: 10px 0 20px 0"/>
+            <img src="${ctx}/images/image.gif" alt="Click to Change Theme" width="150" height="112" class="right" style="margin: 10px 0 20px 0"
+                 onclick="location.href='?theme=${(cssTheme == 'blue' ? 'green' : 'blue')}'"/>
         </div>
 
         <div id="nav">

@@ -8,3 +8,10 @@
 <%@ taglib uri="http://www.opensymphony.com/sitemesh/decorator" prefix="sm" %>
 
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
+
+<c:if test="${not empty param.theme}">
+    <c:set var="cssTheme" value="${param.theme}" scope="session"/>
+</c:if>
+<c:if test="${empty param.theme}">
+    <c:set var="cssTheme" value="${(empty sessionScope.cssTheme) ? initParam['css-theme'] : sessionScope.cssTheme}"/>
+</c:if>
