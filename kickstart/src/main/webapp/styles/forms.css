@@ -171,6 +171,8 @@ textarea.textarea, select.select{
     color: #333;
 }
 
+input.text:hover{ background-color: #ffd }
+
 input.text, input.number, input.url, input.email, input.password, input.file{
     padding: 2px;
 }

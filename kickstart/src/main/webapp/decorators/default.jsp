@@ -7,10 +7,11 @@
 <head>
     <title><sm:title default="Welcome"/> | Spring 2.0 Kickstart</title>
     <link rel="shortcut icon" href="${ctx}/favicon.ico" type="image/x-icon"/>
-    <script type="text/javascript" src="${ctx}/scripts/global.js"></script>
-    <style type="text/css" media="screen,print">
-        @import url(${ctx}/styles/deliciously${cssTheme}/theme.css);
-    </style>
+    <link rel="stylesheet" type="text/css" href="${ctx}/styles/deliciouslyblue/theme.css" title="default" />
+    <link rel="alternate stylesheet" type="text/css" href="${ctx}/styles/deliciouslygreen/theme.css" title="green" />
+    <script type="text/javascript" src="${ctx}/scripts/prototype.js"></script>
+    <script type="text/javascript" src="${ctx}/scripts/stylesheetswitcher.js"></script>
+    <script type="text/javascript" src="${ctx}/scripts/application.js"></script>
     <sm:head/>
 </head>
 
@@ -21,10 +22,9 @@
 
         <h1 style="cursor: pointer" onclick="location.href='${ctx}/'">Spring 2.0 Kickstart</h1>
 
-        <div id="branding"><a href="http://www.springframework.org/"
-title="Spring - java/j2ee Application Framework"><img
-src="${ctx}/images/powered-by-spring.png"
-width="125" height="66" alt="Spring Framework"/></a>
+        <div id="branding">
+            <a href="http://www.springframework.org" title="Spring - java/j2ee Application Framework">
+                <img src="${ctx}/images/powered-by-spring.png" width="125" height="66" alt="Spring Framework"/></a>
         </div>
 
         <p>Spring 2.0 is so tasty it hurts</p>
@@ -52,7 +52,7 @@ width="125" height="66" alt="Spring Framework"/></a>
             </ul>
 
             <img src="${ctx}/images/image.gif" alt="Click to Change Theme" width="150" height="112" class="right" style="margin: 10px 0 20px 0"
-                 onclick="location.href='?theme=${(cssTheme == 'blue' ? 'green' : 'blue')}'"/>
+                 onclick="StyleSheetSwitcher.setActive((StyleSheetSwitcher.getActive() == 'default') ? 'green' : 'default')"/>
         </div>
 
         <div id="nav">

@@ -4,10 +4,10 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd" version="2.4">
 
     <context-param>
-        <param-name>css-theme</param-name>
-        <param-value>blue</param-value>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:/repository-config.xml</param-value>
     </context-param>
-  
+    
     <filter>
         <filter-name>exportFilter</filter-name>
         <filter-class>org.displaytag.filter.ResponseOverrideFilter</filter-class>
@@ -29,6 +29,10 @@
         <dispatcher>REQUEST</dispatcher>
         <dispatcher>FORWARD</dispatcher>
     </filter-mapping>
+    
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
 
     <servlet>
         <servlet-name>kickstart</servlet-name>

@@ -3,7 +3,6 @@
 <head>
     <title>Customer Information</title>
     <%-- Calendar Setup - put in decorator if needed in multiple pages --%>
-    <link  href="${ctx}/styles/calendar.css" type="text/css"  rel="stylesheet"/>
     <script type="text/javascript" src="${ctx}/scripts/calendar.js"></script>
     <script type="text/javascript" src="${ctx}/scripts/calendar-setup.js"></script>
     <script type="text/javascript" src="${ctx}/scripts/lang/calendar-en.js"></script>
@@ -24,7 +23,7 @@
     <li>
         <label for="customerSince" class="desc">Customer Since</label>
         <form:input path="customerSince" cssClass="text date" id="customerSince" size="11"/>
-            <button id="cal" type="button" style="width: 30px"> ... </button>
+            <button id="cal" type="button" style="width: 30px; margin-left: 5px; line-height: 12px"> ... </button>
         <form:errors path="customerSince" cssClass="fieldError"/>
     </li>
 
@@ -55,7 +54,7 @@
 </form:form>
 
 <script type="text/javascript">
-    //Form.focusFirstElement($('userForm'));
+    Form.focusFirstElement($('customer'));
     Calendar.setup(
     {
         inputField  : "customerSince", // id of the input field
@@ -64,8 +63,3 @@
     }
     );
 </script>
-
-<%--
-<v:javascript formName="user" staticJavascript="false" xhtml="true" cdata="false"/>
-<script type="text/javascript" src="<c:url value="/scripts/validator.jsp"/>"></script>
---%>

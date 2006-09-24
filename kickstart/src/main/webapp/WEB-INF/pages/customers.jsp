@@ -23,7 +23,7 @@
     </tbody>
 </table>--%>
 
-<button onclick="location.href='customerform.htm'" class="button"
+<button onclick="location.href='customerform.htm'" class="button" id="addCustomer"
         style="float: right; margin-top: -30px; width: 100px">Add Customer</button>
 
 <d:table name="customerList" class="table" export="true" id="customer" requestURI="" pagesize="10">

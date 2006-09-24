@@ -16,7 +16,7 @@ function highlightTableRows(tableId) {
                     // this will not work for links with onclick handlers that return false
                     eval(call);
                 } else {
-                  location.href = link.getAttribute("href");
+                    location.href = link.getAttribute("href");
                 }
                 this.style.cursor="wait";
             }
@@ -26,3 +26,5 @@ function highlightTableRows(tableId) {
 
 // Show the document's title on the status bar
 window.defaultStatus=document.title;
+
+window.onload = StyleSheetSwitcher.initialize();

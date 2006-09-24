@@ -13,8 +13,6 @@
     display: block;
 }
 
-
-
 /* use a different color for the errors */
 .error {
     border: 2px solid red;
