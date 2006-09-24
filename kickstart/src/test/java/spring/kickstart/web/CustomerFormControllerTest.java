@@ -4,7 +4,7 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.test.AbstractDependencyInjectionSpringContextTests;
-import junit.framework.TestCase;
+
 import spring.kickstart.domain.CustomerServiceMock;
 import spring.kickstart.domain.Customer;
 import spring.kickstart.domain.CustomerService;
