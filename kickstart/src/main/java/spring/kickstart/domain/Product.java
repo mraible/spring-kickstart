@@ -1,9 +1,6 @@
 package spring.kickstart.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.*;
 import static javax.persistence.GenerationType.*;
 
 /**
@@ -14,7 +11,11 @@ public class Product {
     @Id
     @GeneratedValue(strategy = AUTO)
     private Long id;
+
     private String description;
+
+    @Version
+    private long version;
 
     public Long getId() {
         return id;

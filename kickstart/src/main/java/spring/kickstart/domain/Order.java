@@ -30,6 +30,9 @@ public class Order {
     @ManyToOne
     Customer customer;
 
+    @Version
+    private long version;
+
     public Order() {
         this.status = OrderStatus.PENDING;
     }
@@ -45,7 +48,7 @@ public class Order {
     }
 
     public void ship() {
-        this.status = OrderStatus.SHIPPED;    
+        this.status = OrderStatus.SHIPPED;
     }
 
     public Long getId() {

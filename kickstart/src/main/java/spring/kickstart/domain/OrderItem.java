@@ -11,9 +11,15 @@ public class OrderItem {
     @Id
     @GeneratedValue(strategy = AUTO)
     private Long id;
+
     int lineNo;
+
     @ManyToOne Order order;
+
     @ManyToOne Product product;
+
+    @Version
+    private long version;
 
     public Long getId() {
         return id;

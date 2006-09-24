@@ -25,6 +25,9 @@ public class Customer {
     @OneToMany(mappedBy = "customer", cascade = ALL)
     Collection<Order> orders;
 
+    @Version
+    private long version;
+
     public Customer() {}
 
     public Customer(Long id, String name, Date customerSince) {
