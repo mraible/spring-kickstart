@@ -12,7 +12,6 @@ import spring.kickstart.domain.Customer;
 
 /**
  * @author mraible
- * @created Sep 21, 2006 at 6:04:05 PM
  */
 public class CustomerValidator implements Validator {
     private final Log log = LogFactory.getLog(CustomerValidator.class);

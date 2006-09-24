@@ -11,26 +11,26 @@
 
     <bean id="productRepository" class="spring.kickstart.repository.ProductRepositoryImpl"/>
 
-    <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
-
-    <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
+    <bean id="customerService" class="spring.kickstart.domain.CustomerServiceImpl" autowire="byName"/>
 
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory"
             ref="entityManagerFactory" />
     </bean>
 
+    <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
+    <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
+
     <tx:annotation-driven />
 
-    <bean id="entityManagerFactory"
-          class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="persistenceUnitName" value="kickstart"/>
         <property name="jpaVendorAdapter">
           <bean class="org.springframework.orm.jpa.vendor.TopLinkJpaVendorAdapter">
              <property name="showSql" value="false"/>
-             <property name="generateDdl" value="false"/>
-             <property name="databasePlatform" value="Derby"/>
+             <property name="generateDdl" value="true"/>
+             <property name="databasePlatform" value="HSQL"/>
           </bean>
         </property>
         <property name="loadTimeWeaver">
@@ -38,8 +38,7 @@
          </property>
     </bean>
 
-    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" 
-          destroy-method="close">
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
         <property name="driverClass" value="${db.driverClassName}"/>
         <property name="jdbcUrl" value="${db.url}"/>
         <property name="user" value="${db.userName}"/>
@@ -53,7 +52,7 @@
           class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
             <list>
-                <value>jdbc.properties</value>
+                <value>classpath:jdbc.properties</value>
             </list>
         </property>
     </bean>

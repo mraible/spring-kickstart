@@ -9,7 +9,6 @@ import spring.kickstart.domain.Customer;
 
 /**
  * @author mraible
- * @created Sep 21, 2006 at 4:21:30 PM
  */
 public class CustomerFormControllerTest extends TestCase {
     private CustomerFormController form;

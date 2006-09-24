@@ -1,11 +1,6 @@
 package spring.kickstart.domain;
 
-import java.util.List;
-import java.util.Map;
-import java.util.LinkedHashMap;
-import java.util.Date;
-import java.util.ArrayList;
-import java.util.Collection;
+import java.util.*;
 
 /**
  * @author mraible
@@ -52,9 +47,13 @@ public class CustomerServiceMock implements CustomerService {
     }
 
     public void addNewCustomer(Customer customer) {
+        long primaryKey = repository.size() + 1;
+        customer.setId(primaryKey);
+        repository.put(customer.getId(), customer);
     }
 
     public Customer updateCustomer(Customer customer) {
+        repository.put(customer.getId(), customer);
         return customer;
     }
 

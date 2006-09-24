@@ -1,22 +1,19 @@
 package spring.kickstart.web;
 
-import org.springframework.web.servlet.mvc.CancellableFormController;
-import org.springframework.web.bind.ServletRequestDataBinder;
-import org.springframework.beans.propertyeditors.CustomNumberEditor;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.ServletException;
-
+import org.springframework.beans.propertyeditors.CustomNumberEditor;
+import org.springframework.web.bind.ServletRequestDataBinder;
+import org.springframework.web.servlet.mvc.CancellableFormController;
 import spring.kickstart.domain.Customer;
 import spring.kickstart.domain.CustomerService;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
  * @author mraible
- * @created Sep 21, 2006 at 4:22:46 PM
  */
 public class CustomerFormController extends CancellableFormController {
     private CustomerService customerService;
@@ -27,6 +24,7 @@ public class CustomerFormController extends CancellableFormController {
         this.customerService = customerService;
     }
 
+    @Override
     protected void initBinder(HttpServletRequest request,
                               ServletRequestDataBinder binder) {
         // convert java.util.Date
@@ -40,6 +38,7 @@ public class CustomerFormController extends CancellableFormController {
                 new CustomNumberEditor(Long.class, null, true));
     }
 
+    @Override
     protected Object formBackingObject(HttpServletRequest request)
             throws ServletException {
         String id = request.getParameter("id");
@@ -57,4 +56,13 @@ public class CustomerFormController extends CancellableFormController {
         }
     }
 
+    @Override
+    protected void doSubmitAction(Object object) throws Exception {
+        Customer customer = (Customer) object;
+        if (customer.getId() == null) {
+            customerService.addNewCustomer(customer);
+        } else {
+            customerService.updateCustomer(customer);
+        }
+    }
 }

@@ -55,10 +55,10 @@ public class CustomerRepositoryTest extends AbstractJpaTests {
         oi1.setLineNo(1);
         oi1.setOrder(o1);
         oi1.setProduct(p1);
-        List ois = new ArrayList();
+        List<OrderItem> ois = new ArrayList<OrderItem>();
         ois.add(oi1);
         o1.setOrderItems(ois);
-        List os = new ArrayList();
+        List<Order> os = new ArrayList<Order>();
         os.add(o1);
         c.setOrders(os);
 

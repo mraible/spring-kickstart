@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author mraible
- * @created Sep 21, 2006 at 10:52:57 AM
  */
 public class CustomerController implements Controller {
     private final Log log = LogFactory.getLog(CustomerController.class);
