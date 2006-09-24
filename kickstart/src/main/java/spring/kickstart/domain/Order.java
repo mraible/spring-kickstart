@@ -31,6 +31,7 @@ public class Order {
     Customer customer;
 
     public Order() {
+        this.status = OrderStatus.PENDING;
     }
 
     public Order(Customer customer) {
@@ -41,6 +42,10 @@ public class Order {
 
     public void cancel() {
         this.status = OrderStatus.CANCELLED;    
+    }
+
+    public void ship() {
+        this.status = OrderStatus.SHIPPED;    
     }
 
     public Long getId() {
@@ -61,10 +66,6 @@ public class Order {
 
     public OrderStatus getStatus() {
         return status;
-    }
-
-    public void setStatus(OrderStatus status) {
-        this.status = status;
     }
 
     public List<OrderItem> getOrderItems() {
