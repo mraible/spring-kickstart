@@ -16,18 +16,30 @@ public class CustomerServiceMock implements CustomerService {
         Customer c3 = new Customer(3L, "Tommyknocker Brewery", new Date());
 
         List<OrderItem> orderItems = new ArrayList<OrderItem>();
+
+        // order item 1
         OrderItem item = new OrderItem();
         item.setId(1L);
         item.setLineNo(1);
-        item.setOrder(new Order());
         Product p = new Product();
         p.setId(1L);
         p.setDescription("Fat Tire");
         item.setProduct(p);
         orderItems.add(item);
 
+        // order item 2
+        OrderItem item2 = new OrderItem();
+        item2.setId(1L);
+        item2.setLineNo(1);
+        Product p2 = new Product();
+        p2.setId(2L);
+        p2.setDescription("Sunshine Wheat");
+        item2.setProduct(p2);
+        orderItems.add(item2);
+
         Order order = new Order();
         order.setId(2L);
+        order.setOrderDate(new Date());
         order.setOrderItems(orderItems);
 
         Collection<Order> orders = new ArrayList<Order>();
