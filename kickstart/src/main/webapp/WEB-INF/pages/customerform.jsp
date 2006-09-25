@@ -32,14 +32,31 @@
         <label class="desc">Orders</label>
     </li>
     <li style="margin-left: 20px">
-        <c:forEach var="order" items="${customer.orders}">
-            <strong>Order Id:</strong> ${order.id}<br/>
-            <div style="display: inline; margin-left: 20px">
-            <c:forEach var="item" items="${order.orderItems}">
-                <strong>Product Id:</strong> ${item.product.id}
-                <strong>Description:</strong> ${item.product.description}
-            </c:forEach>
-            </div>
+        <c:forEach var="order" items="${customer.orders}" varStatus="status">
+            <fieldset class="fieldset${(status.count % 2 == 0) ? ' odd' : ''}" style="width: 400px">
+                <form:hidden path="orders[${status.index}].id"/>
+                <form:hidden path="orders[${status.index}].status" id="status${status.index}"/>
+                <legend>
+                    Order # ${order.id} <span style="font-weight: normal">| Status is <span style="color: orange">${order.status}</span>
+                    <c:if test="${order.orderDate != null}"> | Placed on <fmt:formatDate value="${order.orderDate}" dateStyle="short"/></c:if>
+                    </span>
+                </legend>
+                <c:if test="${order.status != 'CANCELLED'}">
+                    <input type="submit" value="Cancel Order" class="button"
+                           onclick="$('status${status.index}').value = 'CANCELLED'"
+                           style="width: 90px; float: right; margin: -20px -21px 0 0"/>
+                </c:if>
+                <ul style="margin-left: 20px">
+                <c:forEach var="item" items="${order.orderItems}" varStatus="status2">
+                    <li><strong>Product Id:</strong> ${item.product.id}</li>
+                    <li><label><strong>Description:</strong>
+                        <form:input path="orders[${status.index}].orderItems[${status2.index}].product.description"
+                                cssClass="text medium"/></label>
+                    </li>
+                    ${(!status2.last) ? '<li class="info" style="margin-left: -20px"/>' : ''}
+                </c:forEach>
+                </ul>
+            </fieldset>
         </c:forEach>
     </li>
     </c:if>
