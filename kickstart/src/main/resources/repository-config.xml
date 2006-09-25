@@ -58,7 +58,7 @@
        <property name="serverProperties">
            <props>
                <prop key="server.port">9101</prop>
-               <prop key="server.database.0">./target/db/KICKSTART</prop>
+               <prop key="server.database.0">./db/KICKSTART</prop>
                <prop key="server.dbname.0"></prop>
            </props>
        </property>
