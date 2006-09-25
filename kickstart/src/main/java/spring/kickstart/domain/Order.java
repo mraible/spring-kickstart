@@ -71,6 +71,10 @@ public class Order {
         return status;
     }
 
+    public void setStatus(OrderStatus status) {
+        this.status = status;
+    }
+
     public List<OrderItem> getOrderItems() {
         return orderItems;
     }
