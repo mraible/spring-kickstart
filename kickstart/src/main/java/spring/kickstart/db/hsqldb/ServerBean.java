@@ -20,6 +20,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hsqldb.ServerConfiguration;
 import org.hsqldb.ServerConstants;
+import org.hsqldb.DatabaseManager;
 import org.hsqldb.persist.HsqlProperties;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
@@ -32,13 +33,12 @@ import java.util.Properties;
 /**
  * Bean that will start an instance of an HSQL database.  This class is primarily intended
  * to be used in demo applications.  It allows for a self contained distribution including
- * a database instance.  The DataSource reference is necessary for proper shutdown.
+ * a database instance.
  *
  * This is an example of a bean configuration:
  *
  * <pre>
- *     &lt;bean id="dataBase" class="spring.kickstart.db.hsqldb.ServerBean" singleton="true" lazy-init="false"&gt;
- *         &lt;property name="dataSource"&gt;&lt;ref local="dataSource"/&gt;&lt;/property&gt;
+ *     &lt;bean id="dataBase" class="spring.kickstart.db.hsqldb.ServerBean" scope="singleton" lazy-init="false"&gt;
  *         &lt;property name="serverProperties"&gt;
  *             &lt;props&gt;
  *                 &lt;prop key="server.port"&gt;9101&lt;/prop&gt;
@@ -71,11 +71,6 @@ public class ServerBean implements InitializingBean, DisposableBean {
      */
     private org.hsqldb.Server server;
 
-    /**
-     * DataSource used for shutdown.
-     */
-    private DataSource dataSource;
-
     public Properties getServerProperties() {
         return serverProperties;
     }
@@ -84,17 +79,7 @@ public class ServerBean implements InitializingBean, DisposableBean {
         this.serverProperties = serverProperties;
     }
 
-    public DataSource getDataSource() {
-        return dataSource;
-    }
-
-    public void setDataSource(DataSource dataSource) {
-        this.dataSource = dataSource;
-    }
-
     public void afterPropertiesSet() throws Exception {
-
-
         HsqlProperties configProps = new HsqlProperties(serverProperties);
         if (configProps == null) {
             configProps = new HsqlProperties();
@@ -117,45 +102,13 @@ public class ServerBean implements InitializingBean, DisposableBean {
     }
 
     public void destroy() {
-
+        // Do what it takes to shutdown -- this might need to be enhanced in the future
         log.info("HSQL Server Shutdown sequence initiated");
-        if (dataSource != null) {
-            Connection con = null;
-            try {
-                con = dataSource.getConnection();
-                con.createStatement().execute("SHUTDOWN");
-            } catch (SQLException e) {
-                log.error("HSQL Server Shutdown failed: " + e.getMessage());
-            } finally {
-                try {
-                    if (con != null)
-                    con.close();
-                } catch (Exception ignore) {}
-            }
-        }
-        else {
-            log.warn("HSQL ServerBean needs a dataSource property set to shutdown database safely.");
-        }
         server.signalCloseAllServerConnections();
-        int status = server.stop();
-        long timeout = System.currentTimeMillis() + 1000;
-        while (status != ServerConstants.SERVER_STATE_SHUTDOWN && System.currentTimeMillis() < timeout) {
-            try {
-                Thread.sleep(100);
-                status = server.getState();
-            } catch (InterruptedException e) {
-                log.error("Error while shutting down HSQL Server: " + e.getMessage());
-                break;
-            }
-        }
-        if (status != ServerConstants.SERVER_STATE_SHUTDOWN) {
-            log.warn("HSQL Server failed to shutdown properly.");
-        }
-        else {
-            log.info("HSQL Server Shutdown completed");
-        }
+        server.stop();
+        DatabaseManager.closeDatabases(0);
+        log.info("HSQL Server Shutdown completed");
         server = null;
-
     }
 
 }

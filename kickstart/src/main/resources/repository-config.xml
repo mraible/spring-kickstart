@@ -55,7 +55,6 @@
     </bean>
 
     <bean id="dataBase" class="spring.kickstart.db.hsqldb.ServerBean" scope="singleton" lazy-init="false">
-       <property name="dataSource" ref="dataSource"/>
        <property name="serverProperties">
            <props>
                <prop key="server.port">9101</prop>
@@ -63,15 +62,6 @@
                <prop key="server.dbname.0"></prop>
            </props>
        </property>
-    </bean>
-    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
-        <property name="driverClass" value="org.hsqldb.jdbcDriver"/>
-        <property name="jdbcUrl" value="jdbc:hsqldb:hsql://localhost:9101"/>
-        <property name="user" value="sa"/>
-        <property name="password" value=""/>
-        <property name="minPoolSize" value="2"/>
-        <property name="maxPoolSize" value="15"/>
-        <property name="maxStatements" value="50"/>
     </bean>
 
     <!--<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">-->
