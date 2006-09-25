@@ -289,6 +289,12 @@ fieldset {
     color: #444;
 }
 
+fieldset.odd { background: #eee }
+
+fieldset.odd legend {
+    background: #eee;
+}
+
 /* Firefox and others, don't apply to IE or it will put a border under each input element */
 li>fieldset, form>fieldset { border: 1px solid silver }
 
@@ -304,6 +310,10 @@ legend{
     font-weight: bold;
     margin: 0 0 0 0;
     color: #444;
+    padding: 0 5px;
+    border-top: 1px solid silver;
+    border-right: 1px solid silver;
+    border-left: 1px solid silver
 }
 
 #formProperties[id] legend, .choices[class] legend{
