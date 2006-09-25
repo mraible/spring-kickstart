@@ -48,7 +48,7 @@
             <prop key="toplink.jdbc.user">sa</prop>
             <prop key="toplink.jdbc.password"></prop>
             <prop key="toplink.target-database">oracle.toplink.essentials.platform.database.HSQLPlatform</prop>
-            <prop key="toplink.ddl-generation">drop-and-create-tables</prop>
+            <prop key="toplink.ddl-generation">create-tables</prop>
           </props>
         </property>
         <property name="persistenceUnitName" value="kickstart"/>
