@@ -18,16 +18,12 @@ package spring.kickstart.db.hsqldb;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.hsqldb.ServerConfiguration;
-import org.hsqldb.ServerConstants;
 import org.hsqldb.DatabaseManager;
+import org.hsqldb.ServerConfiguration;
 import org.hsqldb.persist.HsqlProperties;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 
-import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.Properties;
 
 /**
@@ -80,10 +76,7 @@ public class ServerBean implements InitializingBean, DisposableBean {
     }
 
     public void afterPropertiesSet() throws Exception {
-        HsqlProperties configProps = new HsqlProperties(serverProperties);
-        if (configProps == null) {
-            configProps = new HsqlProperties();
-        }
+        HsqlProperties configProps = serverProperties != null ? new HsqlProperties(serverProperties) : new HsqlProperties();
 
         ServerConfiguration.translateDefaultDatabaseProperty(configProps);
 
