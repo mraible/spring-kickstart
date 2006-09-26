@@ -31,8 +31,6 @@
         <property name="basename" value="messages"/>
         <property name="useCodeAsDefaultMessage" value="true"/> 
     </bean>
-
-    <!--<bean id="customerService" class="spring.kickstart.domain.CustomerServiceMock"/>-->
     
     <bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"/>
     
