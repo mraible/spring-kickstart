@@ -38,7 +38,6 @@ public class CustomerControllerTest extends MockObjectTestCase {
         Map m = mav.getModel();
         assertNotNull(m.get("customerList"));
         log.debug(m.get("customerList"));
-        //assertEquals("customers", mav.getViewName());
 
         // verify expectations
         mockService.verify();
