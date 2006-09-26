@@ -65,4 +65,9 @@ public class CustomerFormController extends CancellableFormController {
             customerService.updateCustomer(customer);
         }
     }
+
+    @Override
+    protected boolean suppressBinding(HttpServletRequest request) {
+        return super.isCancelRequest(request);
+    }
 }
