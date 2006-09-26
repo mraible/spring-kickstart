@@ -2,14 +2,15 @@ package spring.kickstart.web;
 
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.test.AbstractDependencyInjectionSpringContextTests;
-
-import spring.kickstart.domain.CustomerServiceMock;
+import org.springframework.validation.BindException;
+import org.springframework.validation.Errors;
+import org.springframework.web.servlet.ModelAndView;
 import spring.kickstart.domain.Customer;
 import spring.kickstart.domain.CustomerService;
+import spring.kickstart.domain.CustomerServiceMock;
 
-import java.util.Date;
+import java.util.List;
 
 /**
  * @author mraible
@@ -31,7 +32,6 @@ public class CustomerFormControllerTest extends AbstractDependencyInjectionSprin
         MockHttpServletRequest request = new MockHttpServletRequest("GET", "");
         request.addParameter("id", "1");
         ModelAndView mv = form.handleRequest(request, new MockHttpServletResponse());
-        //assertEquals("customerform", mv.getViewName());
         assertEquals("customer", form.getCommandName());
         Customer customer = (Customer) mv.getModel().get(form.getCommandName());
         assertEquals(new Long(1), customer.getId());
@@ -39,8 +39,20 @@ public class CustomerFormControllerTest extends AbstractDependencyInjectionSprin
 
     public void testAddNewCustomer() throws Exception {
         CustomerService service = (CustomerService) applicationContext.getBean("customerService");
-        Customer customer = new Customer(null, "Chipotle", new Date());
-        service.addNewCustomer(customer);
-        assertNotNull(customer.getId());
+        List customers = service.getListOfCustomers();
+
+        MockHttpServletRequest request = new MockHttpServletRequest("POST", "");
+        request.addParameter("id", "");
+        request.addParameter("name", "Chipotle");
+        request.addParameter("customerSince", "09/15/2006");
+
+        ModelAndView mv = form.handleRequest(request, new MockHttpServletResponse());
+        assertEquals("redirect:customers.htm", form.getSuccessView());
+
+        // assert no errors
+        Errors errors = (Errors) mv.getModel().get(BindException.MODEL_KEY_PREFIX + form.getCommandName());
+        assertTrue(errors.getAllErrors().size() == 0);
+
+        assertEquals(service.getListOfCustomers().size() - 1, customers.size());
     }
 }
