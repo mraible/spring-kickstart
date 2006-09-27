@@ -23,7 +23,7 @@ public class CustomerFormControllerTest extends AbstractDependencyInjectionSprin
     }
 
     protected String[] getConfigLocations() {
-        return new String[]{"file:**/kickstart-servlet.xml", "repository-config.xml"};
+        return new String[]{"file:**/kickstart-servlet.xml", "repository-mock-config.xml"};
     }
 
     public void testEdit() throws Exception {
