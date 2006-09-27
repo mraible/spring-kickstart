@@ -31,7 +31,7 @@
      - see reference manual section "12.6.1.2. LocalContainerEntityManagerFactoryBean"
      - http://static.springframework.org/spring/docs/2.0.x/reference/orm.html#d0e15545
      -->
-    <bean id="entityManagerFactory"
+    <bean id="entityManagerFactory" depends-on="database"
           class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean">
         <property name="jpaProperties">
           <props>
@@ -46,7 +46,7 @@
         </property>
         <property name="persistenceUnitName" value="kickstart"/>
     </bean>
-    <bean id="dataBase" class="spring.kickstart.db.hsqldb.ServerBean" scope="singleton" lazy-init="false">
+    <bean id="database" class="spring.kickstart.db.hsqldb.ServerBean" scope="singleton" lazy-init="false">
        <property name="serverProperties">
            <props>
                <prop key="server.port">9101</prop>
