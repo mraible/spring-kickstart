@@ -20,6 +20,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hsqldb.DatabaseManager;
 import org.hsqldb.ServerConfiguration;
+import org.hsqldb.Database;
 import org.hsqldb.persist.HsqlProperties;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
@@ -95,11 +96,11 @@ public class ServerBean implements InitializingBean, DisposableBean {
     }
 
     public void destroy() {
-        // Do what it takes to shutdown -- this might need to be enhanced in the future
+        // Do what it takes to shutdown
         log.info("HSQL Server Shutdown sequence initiated");
         server.signalCloseAllServerConnections();
         server.stop();
-        DatabaseManager.closeDatabases(0);
+        DatabaseManager.closeDatabases(Database.CLOSEMODE_NORMAL);
         log.info("HSQL Server Shutdown completed");
         server = null;
     }
