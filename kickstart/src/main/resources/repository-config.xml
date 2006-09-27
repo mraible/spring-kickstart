@@ -56,36 +56,54 @@
        </property>
     </bean>
 
-    <!--<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">-->
-        <!--<property name="dataSource" ref="dataSource"/>-->
-        <!--<property name="persistenceUnitName" value="kickstart"/>-->
-        <!--<property name="jpaVendorAdapter">-->
-          <!--<bean class="org.springframework.orm.jpa.vendor.TopLinkJpaVendorAdapter">-->
-             <!--<property name="showSql" value="true"/>-->
-             <!--<property name="generateDdl" value="false"/>-->
-             <!--<property name="databasePlatform" value="HSQL"/>-->
-          <!--</bean>-->
-        <!--</property>-->
-        <!--<property name="loadTimeWeaver">-->
-            <!--<bean class="org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver"/>-->
-         <!--</property>-->
-    <!--</bean>-->
-    <!--<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">-->
-        <!--<property name="driverClass" value="${db.driverClassName}"/>-->
-        <!--<property name="jdbcUrl" value="${db.url}"/>-->
-        <!--<property name="user" value="${db.userName}"/>-->
-        <!--<property name="password" value="${db.password}"/>-->
-        <!--<property name="minPoolSize" value="2"/>-->
-        <!--<property name="maxPoolSize" value="15"/>-->
-        <!--<property name="maxStatements" value="50"/>-->
-    <!--</bean>-->
-    <!--<bean id="propertyConfigurer"-->
-          <!--class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">-->
-        <!--<property name="locations">-->
-            <!--<list>-->
-                <!--<value>classpath:jdbc.properties</value>-->
-            <!--</list>-->
-        <!--</property>-->
-    <!--</bean>-->
+  <!--
+   - This configuration is intended for a generic production environment
+   - it uses the LocalContainerEntityManagerFactoryBean and a DataSource connection pool.
+   -
+   - You need to use the Spring agent when starting the app server
+   - add -javaagent:/path/to/spring-agent.jar to startup script or set appropriate environment variable
+   - see reference manual section "12.6.1.2. LocalContainerEntityManagerFactoryBean"
+   - http://static.springframework.org/spring/docs/2.0.x/reference/orm.html#d0e15545
+   -
+   - For Tomcat 5.5 you would export/set the environment variable JAVA_OPTS like
+   - > export JAVA_OPTS="-javaagent:/Downloads/spring-framework-2.0-rc4/dist/weavers/spring-agent.jar"
+   - You also need to adjust the jdbc.properties file so it points to the directory where your database is
+   -
+   - NOTE:  There is an alternative option for Tomcat which involves changing the classloader used for the web app,
+   - and this would be the recomended way, but there might not yet be a similar solution for other app servers.
+   -->
+<!--
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="persistenceUnitName" value="kickstart"/>
+        <property name="jpaVendorAdapter">
+          <bean class="org.springframework.orm.jpa.vendor.TopLinkJpaVendorAdapter">
+             <property name="showSql" value="true"/>
+             <property name="generateDdl" value="false"/>
+             <property name="databasePlatform" value="HSQL"/>
+          </bean>
+        </property>
+        <property name="loadTimeWeaver">
+            <bean class="org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver"/>
+         </property>
+    </bean>
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+        <property name="driverClass" value="${db.driverClassName}"/>
+        <property name="jdbcUrl" value="${db.url}"/>
+        <property name="user" value="${db.userName}"/>
+        <property name="password" value="${db.password}"/>
+        <property name="minPoolSize" value="2"/>
+        <property name="maxPoolSize" value="15"/>
+        <property name="maxStatements" value="50"/>
+    </bean>
+    <bean id="propertyConfigurer"
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:jdbc.properties</value>
+            </list>
+        </property>
+    </bean>
+-->
 
 </beans>
