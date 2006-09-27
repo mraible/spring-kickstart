@@ -1,5 +1,6 @@
 package spring.kickstart.domain;
 
+import static javax.persistence.FetchType.EAGER;
 import static javax.persistence.EnumType.STRING;
 import javax.persistence.*;
 import static javax.persistence.CascadeType.*;
@@ -23,7 +24,7 @@ public class Order {
     @Enumerated(value = STRING)
     private OrderStatus status;
 
-    @OneToMany(mappedBy = "order", cascade = ALL)
+    @OneToMany(mappedBy = "order", cascade = ALL, fetch = FetchType.EAGER)
     @OrderBy("lineNo")
     private List<OrderItem> orderItems;
 
@@ -44,7 +45,7 @@ public class Order {
     }
 
     public void cancel() {
-        this.status = OrderStatus.CANCELLED;    
+        this.status = OrderStatus.CANCELLED;
     }
 
     public void ship() {

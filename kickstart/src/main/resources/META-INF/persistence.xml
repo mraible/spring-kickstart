@@ -4,8 +4,6 @@
 
     <persistence-unit name="kickstart" transaction-type="RESOURCE_LOCAL">
 
-      <provider>oracle.toplink.essentials.PersistenceProvider</provider>
-
       <class>spring.kickstart.domain.Customer</class>
       <class>spring.kickstart.domain.Order</class>
       <class>spring.kickstart.domain.OrderItem</class>

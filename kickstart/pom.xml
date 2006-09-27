@@ -79,11 +79,6 @@
       <version>1.0</version>
     </dependency>
     <dependency>
-      <groupId>javax.persistence</groupId>
-      <artifactId>toplink-essentials</artifactId>
-      <version>1.0</version>
-    </dependency>
-    <dependency>
       <groupId>hsqldb</groupId>
       <artifactId>hsqldb</artifactId>
       <version>1.8.0.5</version>
@@ -93,17 +88,34 @@
       <artifactId>c3p0</artifactId>
       <version>0.9.0.4</version>
     </dependency>
+
+    <!-- TopLink dependencies -->
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
+      <groupId>javax.persistence</groupId>
+      <artifactId>toplink-essentials</artifactId>
+      <version>1.0</version>
+    </dependency>
+    
+    <!-- Hibernate dependencies -->
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate</artifactId>
+      <version>3.2.0.cr4</version>
     </dependency>
     <dependency>
-      <groupId>jmock</groupId>
-      <artifactId>jmock</artifactId>
-      <version>1.1.0</version>
-      <scope>test</scope>
+      <groupId>jboss</groupId>
+      <artifactId>javassist</artifactId>
+      <version>3.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-annotations</artifactId>
+      <version>3.2.0.cr2</version>
+    </dependency>
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-entitymanager</artifactId>
+      <version>3.2.0.cr2</version>
     </dependency>
 
     <!-- web dependencies -->
@@ -138,6 +150,21 @@
       <artifactId>sitemesh</artifactId>
       <version>2.2.1</version>
     </dependency>
+
+    <!-- testing dependencies -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>jmock</groupId>
+      <artifactId>jmock</artifactId>
+      <version>1.1.0</version>
+      <scope>test</scope>
+    </dependency>
+
   </dependencies>
 
   <profiles>

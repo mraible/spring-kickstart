@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <beans xmlns="http://www.springframework.org/schema/beans"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:tx="http://www.springframework.org/schema/tx"
@@ -27,7 +28,7 @@
     <!--
      - This configuration is convenient for testing/development but for a production environment
      - you should use the LocalContainerEntityManagerFactoryBean and a DataSource pool
-     - configured for your app server envvironment
+     - configured for your app server environment -
      - see reference manual section "12.6.1.2. LocalContainerEntityManagerFactoryBean"
      - http://static.springframework.org/spring/docs/2.0.x/reference/orm.html#d0e15545
      -->
@@ -57,17 +58,20 @@
     </bean>
 
   <!--
-   - This configuration is intended for a generic production environment
+   - This configuration is intended for a generic production environment using TopLink Essentials
    - it uses the LocalContainerEntityManagerFactoryBean and a DataSource connection pool.
+   -
+   - uncomment dataSource and propertyConfigurer below if you use this
    -
    - You need to use the Spring agent when starting the app server
    - add -javaagent:/path/to/spring-agent.jar to startup script or set appropriate environment variable
    - see reference manual section "12.6.1.2. LocalContainerEntityManagerFactoryBean"
    - http://static.springframework.org/spring/docs/2.0.x/reference/orm.html#d0e15545
    -
-   - For Tomcat 5.5 you would export/set the environment variable JAVA_OPTS like
+   - For Tomcat 5.5 you would export/set the environment variable JAVA_OPTS like:
    - > export JAVA_OPTS="-javaagent:/Downloads/spring-framework-2.0-rc4/dist/weavers/spring-agent.jar"
-   - You also need to adjust the jdbc.properties file so it points to the directory where your database is
+   - You would need to adjust the path to the agent depending on where your download is.
+   - You also need to adjust the jdbc.properties file so it points to the directory where your database is.
    -
    - NOTE:  There is an alternative option for Tomcat which involves changing the classloader used for the web app,
    - and this would be the recomended way, but there might not yet be a similar solution for other app servers.
@@ -78,15 +82,45 @@
         <property name="persistenceUnitName" value="kickstart"/>
         <property name="jpaVendorAdapter">
           <bean class="org.springframework.orm.jpa.vendor.TopLinkJpaVendorAdapter">
-             <property name="showSql" value="true"/>
+             <property name="showSql" value="false"/>
              <property name="generateDdl" value="false"/>
-             <property name="databasePlatform" value="HSQL"/>
+             <property name="database" value="HSQL"/>
           </bean>
         </property>
         <property name="loadTimeWeaver">
             <bean class="org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver"/>
          </property>
     </bean>
+-->
+
+  <!--
+   - This configuration is intended to be used for Hibernate as the JPA implementation
+   -
+   - uncomment dataSource and propertyConfigurer below if you use this
+   -
+   -->
+<!--
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="persistenceUnitName" value="kickstart"/>
+        <property name="jpaVendorAdapter">
+          <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+            <property name="showSql" value="true"/>
+            <property name="generateDdl" value="false"/>
+            <property name="database" value="HSQL"/>
+          </bean>
+        </property>
+    </bean>
+-->
+
+
+  <!--
+   -
+   - uncomment dataSource and propertyConfigurer below if you use any of the
+   - LocalContainerEntityManagerFactoryBean configurations above
+   -
+   -->
+<!--
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
         <property name="driverClass" value="${db.driverClassName}"/>
         <property name="jdbcUrl" value="${db.url}"/>

@@ -27,7 +27,12 @@ public class CustomerRepositoryImpl implements CustomerRepository {
 
 
     public Customer findById(Long id) {
-        return em.find(Customer.class,id);
+        Customer c =  em.find(Customer.class,id);
+        // to avoid lazy load issue - make sure all orders are loaded
+        if (c != null && c.getOrders() != null && c.getOrders().size() > 0) {
+            c.getOrders().iterator();
+        }
+        return c;
     }
 
     public void add(Customer customer) {

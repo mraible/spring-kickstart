@@ -38,11 +38,10 @@
           <bean class="org.springframework.orm.jpa.vendor.TopLinkJpaVendorAdapter">
              <property name="showSql" value="true"/>
              <property name="generateDdl" value="true"/>
-             <property name="databasePlatform" value="HSQL"/>
+             <property name="database" value="HSQL"/>
           </bean>
         </property>
         <property name="loadTimeWeaver">
-          <!--<bean class="org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver"/>-->
           <bean class="org.springframework.instrument.classloading.SimpleLoadTimeWeaver"/>
          </property>
     </bean>
