@@ -95,7 +95,7 @@
       <artifactId>toplink-essentials</artifactId>
       <version>1.0</version>
     </dependency>
-    
+
     <!-- Hibernate dependencies -->
     <dependency>
       <groupId>org.hibernate</groupId>
@@ -116,6 +116,11 @@
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-entitymanager</artifactId>
       <version>3.2.0.cr2</version>
+    </dependency>
+    <dependency>
+        <groupId>org.apache.geronimo.specs</groupId>
+        <artifactId>geronimo-jta_1.0.1B_spec</artifactId>
+        <version>1.0.1</version>
     </dependency>
 
     <!-- web dependencies -->
@@ -166,6 +171,52 @@
     </dependency>
 
   </dependencies>
+
+  <dependencyManagement>
+      <dependencies>
+          <dependency>
+              <groupId>org.hibernate</groupId>
+              <artifactId>hibernate</artifactId>
+              <!--
+              | Excluding jars so we do't need to download them
+              -->
+              <exclusions>
+                  <exclusion>
+                      <groupId>ant</groupId>
+                      <artifactId>ant</artifactId>
+                  </exclusion>
+                  <exclusion>
+                      <groupId>odmg</groupId>
+                      <artifactId>odmg</artifactId>
+                  </exclusion>
+                  <exclusion>
+                      <groupId>proxool</groupId>
+                      <artifactId>proxool</artifactId>
+                  </exclusion>
+                  <exclusion>
+                      <groupId>opensymphony</groupId>
+                      <artifactId>oscache</artifactId>
+                  </exclusion>
+                  <exclusion>
+                      <groupId>swarmcache</groupId>
+                      <artifactId>swarmcache</artifactId>
+                  </exclusion>
+                  <exclusion>
+                      <groupId>jboss</groupId>
+                      <artifactId>jboss-cache</artifactId>
+                  </exclusion>
+                  <exclusion>
+                      <groupId>javax.security</groupId>
+                      <artifactId>jacc</artifactId>
+                  </exclusion>
+                  <exclusion>
+                      <groupId>javax.transaction</groupId>
+                      <artifactId>jta</artifactId>
+                  </exclusion>
+              </exclusions>
+          </dependency>
+      </dependencies>
+  </dependencyManagement>
 
   <profiles>
     <profile>
