@@ -61,17 +61,17 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring</artifactId>
-      <version>2.0-rc4</version>
+      <version>2.0</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-mock</artifactId>
-      <version>2.0-rc4</version>
+      <version>2.0</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-jpa</artifactId>
-      <version>2.0-rc4</version>
+      <version>2.0</version>
     </dependency>
     <dependency>
       <groupId>javax.persistence</groupId>
@@ -100,7 +100,7 @@
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate</artifactId>
-      <version>3.2.0.cr4</version>
+      <version>3.2.6.ga</version>
     </dependency>
     <dependency>
       <groupId>jboss</groupId>
@@ -171,52 +171,6 @@
     </dependency>
 
   </dependencies>
-
-  <dependencyManagement>
-      <dependencies>
-          <dependency>
-              <groupId>org.hibernate</groupId>
-              <artifactId>hibernate</artifactId>
-              <!--
-              | Excluding jars so we do't need to download them
-              -->
-              <exclusions>
-                  <exclusion>
-                      <groupId>ant</groupId>
-                      <artifactId>ant</artifactId>
-                  </exclusion>
-                  <exclusion>
-                      <groupId>odmg</groupId>
-                      <artifactId>odmg</artifactId>
-                  </exclusion>
-                  <exclusion>
-                      <groupId>proxool</groupId>
-                      <artifactId>proxool</artifactId>
-                  </exclusion>
-                  <exclusion>
-                      <groupId>opensymphony</groupId>
-                      <artifactId>oscache</artifactId>
-                  </exclusion>
-                  <exclusion>
-                      <groupId>swarmcache</groupId>
-                      <artifactId>swarmcache</artifactId>
-                  </exclusion>
-                  <exclusion>
-                      <groupId>jboss</groupId>
-                      <artifactId>jboss-cache</artifactId>
-                  </exclusion>
-                  <exclusion>
-                      <groupId>javax.security</groupId>
-                      <artifactId>jacc</artifactId>
-                  </exclusion>
-                  <exclusion>
-                      <groupId>javax.transaction</groupId>
-                      <artifactId>jta</artifactId>
-                  </exclusion>
-              </exclusions>
-          </dependency>
-      </dependencies>
-  </dependencyManagement>
 
   <profiles>
     <profile>
