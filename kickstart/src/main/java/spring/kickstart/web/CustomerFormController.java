@@ -1,32 +1,28 @@
 package spring.kickstart.web;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.beans.propertyeditors.CustomNumberEditor;
-import org.springframework.web.bind.ServletRequestDataBinder;
-import org.springframework.web.servlet.mvc.CancellableFormController;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 import spring.kickstart.domain.Customer;
 import spring.kickstart.domain.CustomerService;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
  * @author mraible
  */
-public class CustomerFormController extends CancellableFormController {
-    private CustomerService customerService;
+@Controller
+@RequestMapping("/customerform")
+public class CustomerFormController {
+    @Autowired
+    CustomerService customerService;
 
-    public CustomerFormController(CustomerService customerService) {
-        setCommandClass(Customer.class);
-        setCommandName("customer");
-        this.customerService = customerService;
-    }
-
-    @Override
-    protected void initBinder(HttpServletRequest request,
-                              ServletRequestDataBinder binder) {
+    @InitBinder
+    protected void initBinder(WebDataBinder binder) {
         // convert java.util.Date
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
         dateFormat.setLenient(false);
@@ -38,36 +34,26 @@ public class CustomerFormController extends CancellableFormController {
                 new CustomNumberEditor(Long.class, null, true));
     }
 
-    @Override
-    protected Object formBackingObject(HttpServletRequest request)
-            throws ServletException {
-        String id = request.getParameter("id");
+    @ModelAttribute("customer")
+    @RequestMapping(method = RequestMethod.GET)
+    public Customer getCustomer(@RequestParam String id) {
+        Customer customer;
 
         if ((id != null) && !id.equals("")) {
-            Customer customer = customerService.locateCustomerById(new Long(id));
-
-            if (customer == null) {
-                return new Customer();
-            }
-
-            return customer;
+            customer = customerService.locateCustomerById(new Long(id));
         } else {
-            return new Customer();
+            customer = new Customer();
         }
+
+        return customer;
     }
 
-    @Override
-    protected void doSubmitAction(Object object) throws Exception {
-        Customer customer = (Customer) object;
+    @RequestMapping(method = RequestMethod.POST)
+    public void submit(@ModelAttribute Customer customer) throws Exception {
         if (customer.getId() == null) {
             customerService.addNewCustomer(customer);
         } else {
             customerService.updateCustomer(customer);
         }
-    }
-
-    @Override
-    protected boolean suppressBinding(HttpServletRequest request) {
-        return super.isCancelRequest(request);
     }
 }

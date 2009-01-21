@@ -5,13 +5,11 @@ import org.apache.commons.logging.LogFactory;
 import org.jmock.Mock;
 import org.jmock.MockObjectTestCase;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.ui.ModelMap;
 import spring.kickstart.domain.Customer;
 import spring.kickstart.domain.CustomerService;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class CustomerControllerTest extends MockObjectTestCase {
     final Log log = LogFactory.getLog(CustomerControllerTest.class);
@@ -20,7 +18,7 @@ public class CustomerControllerTest extends MockObjectTestCase {
 
     protected void setUp() throws Exception {
         mockService = new Mock(CustomerService.class);
-        c.setCustomerService((CustomerService) mockService.proxy());
+        c.customerService = (CustomerService) mockService.proxy();
     }
 
     public void testGetListOfCustomers() throws Exception {
@@ -34,8 +32,8 @@ public class CustomerControllerTest extends MockObjectTestCase {
         mockService.expects(once()).method("getListOfCustomers")
                    .will(returnValue(customers));
 
-        ModelAndView mav = c.handleRequest(null, null);
-        Map m = mav.getModel();
+        ModelMap m = new ModelMap();
+        c.execute(m);
         assertNotNull(m.get("customerList"));
         log.debug(m.get("customerList"));
 
