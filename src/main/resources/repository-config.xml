@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <beans xmlns="http://www.springframework.org/schema/beans"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:tx="http://www.springframework.org/schema/tx"
-    xsi:schemaLocation="http://www.springframework.org/schema/beans
-      http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
-      http://www.springframework.org/schema/tx
-      http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+      http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+      http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.1.xsd">
 
     <bean id="customerRepository" class="spring.kickstart.repository.CustomerRepositoryImpl"/>
 
@@ -15,47 +15,31 @@
     <bean id="customerService" class="spring.kickstart.domain.CustomerServiceImpl" autowire="byName"/>
 
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-        <property name="entityManagerFactory"
-            ref="entityManagerFactory" />
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
 
     <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
 
     <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
 
-    <tx:annotation-driven />  
+    <tx:annotation-driven/>
 
-    <!--
-     - This configuration is convenient for testing/development but for a production environment
-     - you should use the LocalContainerEntityManagerFactoryBean and a DataSource pool
-     - configured for your app server environment -
-     - see reference manual section "12.6.1.2. LocalContainerEntityManagerFactoryBean"
-     - http://static.springframework.org/spring/docs/2.0.x/reference/orm.html#d0e15545
-     -->
-    <bean id="entityManagerFactory" depends-on="database"
-          class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean">
-        <property name="jpaProperties">
-          <props>
-            <prop key="toplink.logging.level">FINE</prop>
-            <prop key="toplink.jdbc.driver">org.hsqldb.jdbcDriver</prop>
-            <prop key="toplink.jdbc.url">jdbc:hsqldb:hsql://localhost:9101</prop>
-            <prop key="toplink.jdbc.user">sa</prop>
-            <prop key="toplink.jdbc.password"></prop>
-            <prop key="toplink.target-database">oracle.toplink.essentials.platform.database.HSQLPlatform</prop>
-            <prop key="toplink.ddl-generation">create-tables</prop>
-          </props>
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="packagesToScan" value="spring.kickstart"/>
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+                <property name="showSql" value="true"/>
+                <property name="generateDdl" value="false"/>
+                <property name="database" value="HSQL"/>
+            </bean>
         </property>
-        <property name="persistenceUnitName" value="kickstart"/>
     </bean>
-    <bean id="database" class="spring.kickstart.db.hsqldb.ServerBean" scope="singleton" lazy-init="false">
-       <property name="serverProperties">
-           <props>
-               <prop key="server.port">9101</prop>
-               <prop key="server.database.0">./db/KICKSTART</prop>
-               <prop key="server.dbname.0"></prop>
-           </props>
-       </property>
-    </bean>
+
+    <jdbc:embedded-database id="dataSource">
+        <jdbc:script location="classpath:schema.sql"/>
+        <jdbc:script location="classpath:test-data.sql"/>
+    </jdbc:embedded-database>
 
     <!-- http://www.jroller.com/ejboy/entry/using_h2_connection_pool_in
     <bean id="dataSource" class="org.h2.jdbcx.JdbcConnectionPool" destroy-method="dispose">
@@ -68,88 +52,4 @@
             </constructor-arg>
         </bean>
     -->
-
-  <!--
-   - This configuration is intended for a generic production environment using TopLink Essentials
-   - it uses the LocalContainerEntityManagerFactoryBean and a DataSource connection pool.
-   -
-   - uncomment dataSource and propertyConfigurer below if you use this
-   -
-   - You need to use the Spring agent when starting the app server
-   - add -javaagent:/path/to/spring-agent.jar to startup script or set appropriate environment variable
-   - see reference manual section "12.6.1.2. LocalContainerEntityManagerFactoryBean"
-   - http://static.springframework.org/spring/docs/2.0.x/reference/orm.html#d0e15545
-   -
-   - For Tomcat 5.5 you would export/set the environment variable JAVA_OPTS like:
-   - > export JAVA_OPTS="-javaagent:/Downloads/spring-framework-2.0-rc4/dist/weavers/spring-agent.jar"
-   - You would need to adjust the path to the agent depending on where your download is.
-   - You also need to adjust the jdbc.properties file so it points to the directory where your database is.
-   -
-   - NOTE:  There is an alternative option for Tomcat which involves changing the classloader used for the web app,
-   - and this would be the recomended way, but there might not yet be a similar solution for other app servers.
-   -->
-<!--
-    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-        <property name="dataSource" ref="dataSource"/>
-        <property name="persistenceUnitName" value="kickstart"/>
-        <property name="jpaVendorAdapter">
-          <bean class="org.springframework.orm.jpa.vendor.TopLinkJpaVendorAdapter">
-             <property name="showSql" value="false"/>
-             <property name="generateDdl" value="false"/>
-             <property name="database" value="HSQL"/>
-          </bean>
-        </property>
-        <property name="loadTimeWeaver">
-            <bean class="org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver"/>
-         </property>
-    </bean>
--->
-
-  <!--
-   - This configuration is intended to be used for Hibernate as the JPA implementation
-   -
-   - uncomment dataSource and propertyConfigurer below if you use this
-   -
-   -->
-<!--
-    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-        <property name="dataSource" ref="dataSource"/>
-        <property name="persistenceUnitName" value="kickstart"/>
-        <property name="jpaVendorAdapter">
-          <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-            <property name="showSql" value="true"/>
-            <property name="generateDdl" value="false"/>
-            <property name="database" value="HSQL"/>
-          </bean>
-        </property>
-    </bean>
--->
-
-
-  <!--
-   -
-   - uncomment dataSource and propertyConfigurer below if you use any of the
-   - LocalContainerEntityManagerFactoryBean configurations above
-   -
-   -->
-<!--
-    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
-        <property name="driverClass" value="${db.driverClassName}"/>
-        <property name="jdbcUrl" value="${db.url}"/>
-        <property name="user" value="${db.userName}"/>
-        <property name="password" value="${db.password}"/>
-        <property name="minPoolSize" value="2"/>
-        <property name="maxPoolSize" value="15"/>
-        <property name="maxStatements" value="50"/>
-    </bean>
-    <bean id="propertyConfigurer"
-          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="locations">
-            <list>
-                <value>classpath:jdbc.properties</value>
-            </list>
-        </property>
-    </bean>
--->
-
 </beans>

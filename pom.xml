@@ -1,263 +1,185 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>spring.kickstart</groupId>
-  <artifactId>kickstart</artifactId>
-  <packaging>war</packaging>
-  <version>1.0-SNAPSHOT</version>
-  <name>Spring 2.0 Kickstart</name>
-  <url>http://maven.apache.org</url>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>spring.kickstart</groupId>
+    <artifactId>kickstart</artifactId>
+    <packaging>war</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <name>Spring 3.1 Kickstart</name>
+    <url>http://maven.apache.org</url>
 
-  <build>
-    <defaultGoal>package</defaultGoal>
-    <finalName>kickstart</finalName>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <configuration>
-          <source>1.5</source>
-          <target>1.5</target>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.mortbay.jetty</groupId>
-        <artifactId>maven-jetty-plugin</artifactId>
-        <configuration>
-          <scanIntervalSeconds>3</scanIntervalSeconds>
-          <contextPath>/</contextPath>
-          <scanTargets>
-            <scanTarget>src/main/webapp/WEB-INF/kickstart-servlet.xml</scanTarget>
-            <scanTarget>src/main/resources/messages.properties</scanTarget>
-          </scanTargets>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
-
-  <repositories>
-    <repository>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-      <id>central</id>
-      <name>Maven Repository Switchboard</name>
-      <url>http://repo1.maven.org/maven2</url>
-    </repository>
-    <repository>
-      <id>springdeveloper</id>
-      <name>springdeveloper repository</name>
-      <url>http://repository.springdeveloper.com/maven2/</url>
-    </repository>
-    <repository>
-      <id>java.net</id>
-      <url>https://maven-repository.dev.java.net/nonav/repository</url>
-      <layout>legacy</layout>
-    </repository>
-  </repositories>
-
-  <dependencies>
-    <!-- persistence dependencies -->
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring</artifactId>
-      <version>2.5.5</version>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-webmvc</artifactId>
-      <version>2.5.5</version>
-      <exclusions>
-          <exclusion>
-              <groupId>org.springframework</groupId>
-              <artifactId>spring-beans</artifactId>
-          </exclusion>
-          <exclusion>
-              <groupId>org.springframework</groupId>
-              <artifactId>spring-core</artifactId>
-          </exclusion>
-          <exclusion>
-              <groupId>org.springframework</groupId>
-              <artifactId>spring-context</artifactId>
-          </exclusion>
-          <exclusion>
-              <groupId>org.springframework</groupId>
-              <artifactId>spring-context-support</artifactId>
-          </exclusion>
-          <exclusion>
-              <groupId>org.springframework</groupId>
-              <artifactId>spring-web</artifactId>
-          </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-test</artifactId>
-      <version>2.5.5</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>javax.persistence</groupId>
-      <artifactId>persistence-api</artifactId>
-      <version>1.0</version>
-    </dependency>
-    <dependency>
-      <groupId>hsqldb</groupId>
-      <artifactId>hsqldb</artifactId>
-      <version>1.8.0.5</version>
-    </dependency>
-    <dependency>
-      <groupId>c3p0</groupId>
-      <artifactId>c3p0</artifactId>
-      <version>0.9.0.4</version>
-    </dependency>
-
-    <!-- TopLink dependencies -->
-    <dependency>
-      <groupId>javax.persistence</groupId>
-      <artifactId>toplink-essentials</artifactId>
-      <version>1.0</version>
-    </dependency>
-
-    <!-- Hibernate dependencies -->
-    <!--dependency>
-      <groupId>org.hibernate</groupId>
-      <artifactId>hibernate</artifactId>
-      <version>3.2.6.ga</version>
-    </dependency>
-    <dependency>
-      <groupId>jboss</groupId>
-      <artifactId>javassist</artifactId>
-      <version>3.0</version>
-    </dependency>
-    <dependency>
-      <groupId>org.hibernate</groupId>
-      <artifactId>hibernate-annotations</artifactId>
-      <version>3.2.0.cr2</version>
-    </dependency>
-    <dependency>
-      <groupId>org.hibernate</groupId>
-      <artifactId>hibernate-entitymanager</artifactId>
-      <version>3.2.0.cr2</version>
-    </dependency>
-    <dependency>
-        <groupId>org.apache.geronimo.specs</groupId>
-        <artifactId>geronimo-jta_1.0.1B_spec</artifactId>
-        <version>1.0.1</version>
-    </dependency-->
-
-    <!-- web dependencies -->
-    <dependency>
-      <groupId>displaytag</groupId>
-      <artifactId>displaytag</artifactId>
-      <version>1.1</version>
-    </dependency>
-    <dependency>
-      <groupId>log4j</groupId>
-      <artifactId>log4j</artifactId>
-      <version>1.2.13</version>
-    </dependency>
-    <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>servlet-api</artifactId>
-      <version>2.4</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>jstl</artifactId>
-      <version>1.1.2</version>
-    </dependency>
-    <dependency>
-      <groupId>taglibs</groupId>
-      <artifactId>standard</artifactId>
-      <version>1.1.2</version>
-    </dependency>
-    <dependency>
-      <groupId>opensymphony</groupId>
-      <artifactId>sitemesh</artifactId>
-      <version>2.2.1</version>
-    </dependency>
-
-    <!-- testing dependencies -->
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>jmock</groupId>
-      <artifactId>jmock</artifactId>
-      <version>1.1.0</version>
-      <scope>test</scope>
-    </dependency>
-
-  </dependencies>
-
-  <profiles>
-    <profile>
-      <id>selenium</id>
-      <activation>
-        <property>
-          <name>selenium</name>
-        </property>
-      </activation>
-      <build>
+    <build>
+        <defaultGoal>package</defaultGoal>
+        <finalName>kickstart</finalName>
         <plugins>
-          <plugin>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>dependency-maven-plugin</artifactId>
-            <executions>
-              <execution>
-                <id>unzip-selenium</id>
-                <phase>generate-resources</phase>
-                <goals>
-                  <goal>unpack</goal>
-                </goals>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
                 <configuration>
-                  <artifactItems>
-                    <artifactItem>
-                      <groupId>org.openqa.selenium.core</groupId>
-                      <artifactId>selenium-core</artifactId>
-                      <version>0.8.0</version>
-                    </artifactItem>
-                  </artifactItems>
-                  <outputDirectory>${project.build.directory}/selenium</outputDirectory>
+                    <source>1.6</source>
+                    <target>1.6</target>
                 </configuration>
-              </execution>
-            </executions>
-          </plugin>
-          <plugin>
-            <artifactId>maven-antrun-plugin</artifactId>
-            <executions>
-              <execution>
-                <id>copy-selenium</id>
-                <phase>process-resources</phase>
+            </plugin>
+            <plugin>
+                <groupId>org.mortbay.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>8.1.0.v20120127</version>
                 <configuration>
-                  <tasks>
-                    <copy todir="${project.build.directory}/${artifactId}/selenium/core">
-                      <fileset dir="${project.build.directory}/selenium/core"/>
-                    </copy>
-                    <copy todir="${project.build.directory}/${artifactId}/selenium/tests">
-                      <fileset dir="${basedir}/src/test/selenium"/>
-                    </copy>
-                  </tasks>
+                    <scanIntervalSeconds>3</scanIntervalSeconds>
+                    <contextPath>/</contextPath>
+                    <scanTargets>
+                        <scanTarget>src/main/webapp/WEB-INF/kickstart-servlet.xml</scanTarget>
+                        <scanTarget>src/main/resources/messages.properties</scanTarget>
+                    </scanTargets>
                 </configuration>
-                <goals>
-                  <goal>run</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
+            </plugin>
         </plugins>
-      </build>
-      <repositories>
-        <repository>
-          <id>OpenQA</id>
-          <url>http://maven.openqa.org</url>
-        </repository>
-      </repositories>
-    </profile>
-  </profiles>
+    </build>
+
+    <dependencies>
+        <!-- persistence dependencies -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+            <version>3.1.0.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>3.1.0.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>3.1.0.RELEASE</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+            <version>2.2.8</version>
+        </dependency>
+
+        <!-- Hibernate dependencies -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>4.0.1.Final</version>
+        </dependency>
+
+        <!-- web dependencies -->
+        <dependency>
+            <groupId>displaytag</groupId>
+            <artifactId>displaytag</artifactId>
+            <version>1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.13</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.4</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>taglibs</groupId>
+            <artifactId>standard</artifactId>
+            <version>1.1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>opensymphony</groupId>
+            <artifactId>sitemesh</artifactId>
+            <version>2.2.1</version>
+        </dependency>
+
+        <!-- testing dependencies -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.8.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>jmock</groupId>
+            <artifactId>jmock</artifactId>
+            <version>1.1.0</version>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+    <profiles>
+        <profile>
+            <id>selenium</id>
+            <activation>
+                <property>
+                    <name>selenium</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>dependency-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>unzip-selenium</id>
+                                <phase>generate-resources</phase>
+                                <goals>
+                                    <goal>unpack</goal>
+                                </goals>
+                                <configuration>
+                                    <artifactItems>
+                                        <artifactItem>
+                                            <groupId>org.openqa.selenium.core</groupId>
+                                            <artifactId>selenium-core</artifactId>
+                                            <version>0.8.0</version>
+                                        </artifactItem>
+                                    </artifactItems>
+                                    <outputDirectory>${project.build.directory}/selenium</outputDirectory>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>copy-selenium</id>
+                                <phase>process-resources</phase>
+                                <configuration>
+                                    <tasks>
+                                        <copy todir="${project.build.directory}/${project.artifactId}/selenium/core">
+                                            <fileset dir="${project.build.directory}/selenium/core"/>
+                                        </copy>
+                                        <copy todir="${project.build.directory}/${project.artifactId}/selenium/tests">
+                                            <fileset dir="${basedir}/src/test/selenium"/>
+                                        </copy>
+                                    </tasks>
+                                </configuration>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+            <repositories>
+                <repository>
+                    <id>OpenQA</id>
+                    <url>http://maven.openqa.org</url>
+                </repository>
+            </repositories>
+        </profile>
+    </profiles>
 </project>
