@@ -1,8 +1,7 @@
-Download and install Maven 2.0.4 (download from http://maven.apache.org/download.html)
+Download and install Maven 3.0.4 (download from http://maven.apache.org/download.html). Make sure you have Java 7 installed and set as JAVA_HOME. 
 
-switch to the kickstart directory and run:
-  mvn clean package
+Run the following commands to start the app.
+
   mvn jetty:run
- 
-This project was originally created using 
-  mvn archetype:create -DgroupId=spring.kickstart app -DartifactId=kickstart -DarchetypeArtifactId=maven-archetype-webapp
+
+After starting, you can view it at http://localhost:8080.

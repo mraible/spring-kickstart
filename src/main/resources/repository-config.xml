@@ -57,6 +57,18 @@
        </property>
     </bean>
 
+    <!-- http://www.jroller.com/ejboy/entry/using_h2_connection_pool_in
+    <bean id="dataSource" class="org.h2.jdbcx.JdbcConnectionPool" destroy-method="dispose">
+            <constructor-arg>
+                <bean class="org.h2.jdbcx.JdbcDataSource">
+                    <property name="URL" value="jdbc:h2:dbname"/>
+                    <property name="user" value="user"/>
+                    <property name="password" value="password"/>
+                 </bean>
+            </constructor-arg>
+        </bean>
+    -->
+
   <!--
    - This configuration is intended for a generic production environment using TopLink Essentials
    - it uses the LocalContainerEntityManagerFactoryBean and a DataSource connection pool.
