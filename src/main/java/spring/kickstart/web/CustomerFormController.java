@@ -1,14 +1,17 @@
 package spring.kickstart.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.beans.propertyeditors.CustomNumberEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import spring.kickstart.domain.Customer;
 import spring.kickstart.domain.CustomerService;
 
+import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -20,6 +23,8 @@ import java.util.Date;
 public class CustomerFormController {
     @Autowired
     CustomerService customerService;
+    @Autowired
+    CustomerValidator validator;
 
     @InitBinder
     protected void initBinder(WebDataBinder binder) {
@@ -36,7 +41,7 @@ public class CustomerFormController {
 
     @ModelAttribute("customer")
     @RequestMapping(method = RequestMethod.GET)
-    public Customer getCustomer(@RequestParam String id) {
+    public Customer getCustomer(@RequestParam(required = false) String id) {
         Customer customer;
 
         if ((id != null) && !id.equals("")) {
@@ -49,11 +54,24 @@ public class CustomerFormController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public void submit(@ModelAttribute Customer customer) throws Exception {
-        if (customer.getId() == null) {
-            customerService.addNewCustomer(customer);
-        } else {
-            customerService.updateCustomer(customer);
+    public String submit(@ModelAttribute Customer customer, BindingResult errors,
+                         HttpServletRequest request) throws Exception {
+        boolean doValidate = (request.getParameter("cancel") == null &&
+                request.getParameter("delete") == null);
+
+        if (doValidate) { // don't validate when deleting or cancelling
+            validator.validate(customer, errors);
+            if (errors.hasErrors()) {
+                return "customerform";
+            } else {
+                if (customer.getId() == null) {
+                    customerService.addNewCustomer(customer);
+                } else {
+                    customerService.updateCustomer(customer);
+                }
+            }
         }
+
+        return "redirect:customers.htm";
     }
 }

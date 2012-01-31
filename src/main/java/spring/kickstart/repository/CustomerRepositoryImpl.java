@@ -15,16 +15,11 @@ import javax.persistence.PersistenceContext;
  * @author trisberg
  */
 @Repository
-@Transactional(propagation = Propagation.SUPPORTS)
+@Transactional(readOnly = true)
 public class CustomerRepositoryImpl implements CustomerRepository {
 
-    private EntityManager em;
-
     @PersistenceContext
-    public void setEntityManager(EntityManager entityManager) {
-        this.em = entityManager;
-    }
-
+    private EntityManager em;
 
     public Customer findById(Long id) {
         Customer c =  em.find(Customer.class,id);
@@ -35,12 +30,14 @@ public class CustomerRepositoryImpl implements CustomerRepository {
         return c;
     }
 
-    public void add(Customer customer) {
-        em.persist(customer);
-    }
-
-    public Customer merge(Customer customer) {
-        return em.merge(customer);
+    @Transactional
+    public Customer save(Customer customer) {
+        if (customer.getId() == null) {
+            em.persist(customer);
+            return customer;
+        } else {
+            return em.merge(customer);
+        }
     }
 
     public List<Customer> findAll() {

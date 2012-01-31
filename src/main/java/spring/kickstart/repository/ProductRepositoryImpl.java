@@ -28,8 +28,13 @@ public class ProductRepositoryImpl implements ProductRepository {
         return em.find(Product.class, id);
     }
 
-    public void add(Product p) {
-        em.persist(p);
+    public Product save(Product p) {
+        if (p.getId() == null) {
+            em.persist(p);
+            return p;
+        } else {
+            return em.merge(p);
+        }
     }
 
     public List<Product> findAll() {

@@ -4,6 +4,8 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.AbstractDependencyInjectionSpringContextTests;
 import org.springframework.validation.BindException;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.DataBinder;
 import org.springframework.validation.Errors;
 import org.springframework.web.servlet.ModelAndView;
 import spring.kickstart.domain.Customer;
@@ -32,28 +34,24 @@ public class CustomerFormControllerTest extends AbstractDependencyInjectionSprin
         // verify controller can grab user
         MockHttpServletRequest request = new MockHttpServletRequest("GET", "");
         request.addParameter("id", "1");
-        /*ModelAndView mv = form.handleRequest(request, new MockHttpServletResponse());
-        assertEquals("customer", form.getCommandName());
-        Customer customer = (Customer) mv.getModel().get(form.getCommandName());
-        assertEquals(new Long(1), customer.getId());*/
+        Customer customer = form.getCustomer("1");
+        assertNotNull(customer);
+        assertEquals(new Long(1), customer.getId());
     }
 
     public void testAddNewCustomer() throws Exception {
         CustomerService service = (CustomerService) applicationContext.getBean("customerService");
         List customers = service.getListOfCustomers();
+        
+        Customer customer = new Customer();
+        customer.setName("Chipotle");
 
-        MockHttpServletRequest request = new MockHttpServletRequest("POST", "");
-        request.addParameter("id", "");
-        request.addParameter("name", "Chipotle");
-        request.addParameter("customerSince", "09/15/2006");
-
-        /*ModelAndView mv = form.handleRequest(request, new MockHttpServletResponse());
-        assertEquals("redirect:customers.htm", form.getSuccessView());
+        BindingResult errors = new DataBinder(customer).getBindingResult();
+        form.submit(customer, errors, new MockHttpServletRequest());
 
         // assert no errors
-        Errors errors = (Errors) mv.getModel().get(BindException.MODEL_KEY_PREFIX + form.getCommandName());
-        assertTrue(errors.getAllErrors().size() == 0);
+        assertFalse(errors.hasErrors());
 
-        assertEquals(service.getListOfCustomers().size() - 1, customers.size());*/
+        assertEquals(service.getListOfCustomers().size() - 1, customers.size());
     }
 }

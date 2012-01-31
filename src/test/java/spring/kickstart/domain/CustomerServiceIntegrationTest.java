@@ -1,42 +1,41 @@
 package spring.kickstart.domain;
 
-import org.springframework.test.jpa.AbstractJpaTests;
-import org.springframework.orm.jpa.EntityManagerFactoryUtils;
-import spring.kickstart.domain.*;
-import spring.kickstart.repository.CustomerRepository;
-import spring.kickstart.repository.ProductRepository;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.transaction.TransactionConfiguration;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 /**
  * @author trisberg
  */
-public class CustomerServiceIntegrationTest extends AbstractJpaTests {
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"/repository-config.xml"})
+@Transactional
+@TransactionConfiguration(transactionManager = "transactionManager", defaultRollback = false)
+public class CustomerServiceIntegrationTest {
 
-    private EntityManagerFactory emf;
+    @PersistenceContext
+    private EntityManager em;
+    @Autowired
     private CustomerService customerService;
     private Long testId;
 
-    public void setEntityManagerFactory(EntityManagerFactory emf) {
-        this.emf = emf;
-    }
-
-    public void setCustomerService(CustomerService customerService) {
-        this.customerService = customerService;
-    }
-
-    protected String[] getConfigLocations() {
-        return new String[] {"service-test-config.xml"};
-    }
-
-    @Override
-    protected void onSetUpInTransaction() throws Exception {
-
-        EntityManager em = EntityManagerFactoryUtils.getTransactionalEntityManager(emf);
+    @Before
+    @Transactional
+    public void onSetUpInTransaction() throws Exception {
 
         Product p1 = new Product();
         p1.setDescription("Product1");
@@ -59,17 +58,16 @@ public class CustomerServiceIntegrationTest extends AbstractJpaTests {
 
         em.persist(c);
         testId = c.getId();
-
-        super.onSetUpInTransaction();
     }
 
+    @Test
     public void testGetCustomerList() {
         List<Customer> l = customerService.getListOfCustomers();
         assertTrue(l.size() == 1);
     }
 
-    public void testAddAndRetreiveCustomer() {
-
+    @Test
+    public void testAddAndRetrieveCustomer() {
         Customer c = new Customer();
         c.setName("New2");
         c.setCustomerSince(new Date());
@@ -82,15 +80,15 @@ public class CustomerServiceIntegrationTest extends AbstractJpaTests {
         assertTrue("New2".equals(c2.getName()));
     }
 
-    public void testRetreiveExistingCustomer() {
-
+    @Test
+    public void testRetrieveExistingCustomer() {
         Customer c = customerService.locateCustomerById(testId);
         assertTrue("Test".equals(c.getName()));
         assertTrue(c.getOrders().size() > 0);
     }
 
+    @Test
     public void testModifyExistingCustomer() {
-
         Customer c = customerService.locateCustomerById(testId);
         assertTrue("Test".equals(c.getName()));
         assertTrue(c.getOrders().size() > 0);
@@ -106,7 +104,5 @@ public class CustomerServiceIntegrationTest extends AbstractJpaTests {
         assertTrue(c2.getOrders().size() > 0);
         Order o2 = (Order) c2.getOrders().toArray()[0];
         assertEquals(OrderStatus.CANCELLED, o2.getStatus());
-
     }
-
 }

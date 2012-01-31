@@ -11,9 +11,7 @@ public interface CustomerRepository {
 
     Customer findById(Long id);
 
-    void add(Customer customer);
-
-    Customer merge(Customer customer);
+    Customer save(Customer customer);
 
     List<Customer> findAll();
 }

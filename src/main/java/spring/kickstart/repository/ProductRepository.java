@@ -12,7 +12,7 @@ public interface ProductRepository {
 
     Product findById(Long id);
 
-    void add(Product p);
+    Product save(Product p);
 
     List<Product> findAll();
 

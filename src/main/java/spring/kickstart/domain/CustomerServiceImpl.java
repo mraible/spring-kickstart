@@ -1,5 +1,7 @@
 package spring.kickstart.domain;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import spring.kickstart.repository.CustomerRepository;
 
 import java.util.List;
@@ -13,14 +15,12 @@ import org.apache.commons.logging.LogFactory;
 /**
  * @author trisberg
  */
+@Service
 public class CustomerServiceImpl implements CustomerService {
     private final Log log = LogFactory.getLog(CustomerServiceImpl.class);
 
+    @Autowired
     CustomerRepository customerRepository;
-
-    public void setCustomerRepository(CustomerRepository customerRepository) {
-        this.customerRepository = customerRepository;
-    }
 
     public Customer locateCustomerById(Long id) {
         if (log.isDebugEnabled())
@@ -31,7 +31,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Transactional(propagation = Propagation.REQUIRED)
     public void addNewCustomer(Customer customer) {
 
-        customerRepository.add(customer);
+        customerRepository.save(customer);
 
         if (log.isDebugEnabled() && customer != null)
             log.debug("executing 'addNewCustomer' method...: ID assigned: " + customer.getId());
@@ -42,7 +42,7 @@ public class CustomerServiceImpl implements CustomerService {
         if (log.isDebugEnabled() && customer != null)
             log.debug("executing 'updateCustomer' method...: updating ID: " + customer.getId());
 
-        return customerRepository.merge(customer);
+        return customerRepository.save(customer);
     }
 
     public List<Customer> getListOfCustomers() {

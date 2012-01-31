@@ -16,7 +16,7 @@ import java.util.Date;
 @Table(name = "orders") // ORDER is a reserved word in most, if not all, SQL databases - used with ORDER BY
 public class Order {
     @Id
-    @GeneratedValue(strategy = AUTO)
+    @GeneratedValue(strategy = SEQUENCE)
     private Long id;
 
     @Temporal(DATE) private Date orderDate;

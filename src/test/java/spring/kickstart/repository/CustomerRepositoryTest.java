@@ -1,7 +1,20 @@
 package spring.kickstart.repository;
 
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit38.AbstractJUnit38SpringContextTests;
+import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.transaction.BeforeTransaction;
+import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.test.jpa.AbstractJpaTests;
 import org.springframework.orm.jpa.EntityManagerFactoryUtils;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import spring.kickstart.domain.Customer;
 import spring.kickstart.domain.Order;
 import spring.kickstart.domain.Product;
@@ -9,39 +22,31 @@ import spring.kickstart.domain.OrderItem;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 /**
  * @author trisberg
  */
-public class CustomerRepositoryTest extends AbstractJpaTests {
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"/repository-config.xml"})
+@Transactional
+@TransactionConfiguration(transactionManager = "transactionManager", defaultRollback = false)
+public class CustomerRepositoryTest {
 
+    @PersistenceContext
+    private EntityManager em;
+    @Autowired
     private CustomerRepository customerRepository;
-    private ProductRepository productRepository;
-    private EntityManagerFactory emf;
 
-    public void setCustomerRepository(CustomerRepository customerRepository) {
-        this.customerRepository = customerRepository;
-    }
-
-    public void setProductRepository(ProductRepository productRepository) {
-        this.productRepository = productRepository;
-    }
-
-    public void setEntityManagerFactory(EntityManagerFactory emf) {
-        this.emf = emf;
-    }
-
-    protected String[] getConfigLocations() {
-        return new String[] {"repository-test-config.xml"};
-    }
-
-    protected void onSetUpInTransaction() throws Exception {
-
-        EntityManager em =
-                EntityManagerFactoryUtils.getTransactionalEntityManager(emf);
+    @Before
+    @Transactional
+    public void onSetUpInTransaction() {
 
         Product p1 = new Product();
         p1.setDescription("Product1");
@@ -63,24 +68,24 @@ public class CustomerRepositoryTest extends AbstractJpaTests {
         c.setOrders(os);
 
         em.persist(c);
-
-        super.onSetUpInTransaction();
     }
 
+    @Test
     public void testAddCustomer() {
         Customer c = new Customer();
         c.setName("New");
         c.setCustomerSince(new Date());
-        customerRepository.add(c);
-        List<Customer> l = customerRepository.findAll();
-        assertTrue(l.size() == 2);
+        customerRepository.save(c);
+        List<Customer> customers = customerRepository.findAll();
+        assertTrue(customers.contains(c));
     }
 
-    public void testRetreiveCustomer() {
+    @Test
+    public void testRetrieveCustomer() {
         Customer c = new Customer();
         c.setName("NewCustomer!");
         c.setCustomerSince(new Date());
-        customerRepository.add(c);
+        customerRepository.save(c);
         Long newId = c.getId();
         c = null;
         Customer c2 = customerRepository.findById(newId);

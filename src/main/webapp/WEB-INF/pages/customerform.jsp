@@ -62,10 +62,10 @@
     </c:if>
     <li class="buttonBar bottom">
         <input type="submit" class="button" name="save" value="Save"/>
-      <%--<c:if test="${not empty param.id}">
+      <c:if test="${not empty param.id}">
         <input type="submit" class="button" name="delete" value="Delete"/>
-      </c:if>--%>
-      	<input type="submit" class="button" name="_cancel" value="Cancel" onclick="bCancel=true"/>
+      </c:if>
+      	<input type="submit" class="button" name="cancel" value="Cancel" onclick="bCancel=true"/>
     </li>
 </ul>
 </form:form>

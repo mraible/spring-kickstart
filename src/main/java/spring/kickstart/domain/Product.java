@@ -9,7 +9,7 @@ import static javax.persistence.GenerationType.*;
 @Entity
 public class Product {
     @Id
-    @GeneratedValue(strategy = AUTO)
+    @GeneratedValue(strategy = SEQUENCE)
     private Long id;
 
     private String description;

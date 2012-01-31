@@ -1,5 +1,7 @@
 package spring.kickstart.web;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 import org.springframework.validation.Errors;
@@ -13,14 +15,11 @@ import spring.kickstart.domain.Customer;
 /**
  * @author mraible
  */
+@Component
 public class CustomerValidator implements Validator {
     private final Log log = LogFactory.getLog(CustomerValidator.class);
+    @Autowired
     private MessageSource messageSource;
-
-    @Required
-    public void setMessageSource(MessageSource messageSource) {
-        this.messageSource = messageSource;
-    }
 
     public boolean supports(Class clazz) {
         return clazz.equals(Customer.class);
