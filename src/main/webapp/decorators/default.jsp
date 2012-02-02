@@ -6,11 +6,12 @@
 <head>
     <title><sm:title default="Welcome"/> | Spring Kickstart</title>
     <link rel="shortcut icon" href="${ctx}/favicon.ico" type="image/x-icon"/>
-    <link rel="stylesheet" type="text/css" href="${ctx}/styles/deliciouslyblue/theme.css" title="default" />
-    <link rel="alternate stylesheet" type="text/css" href="${ctx}/styles/deliciouslygreen/theme.css" title="green" />
-    <script type="text/javascript" src="${ctx}/scripts/prototype.js"></script>
-    <script type="text/javascript" src="${ctx}/scripts/stylesheetswitcher.js"></script>
-    <script type="text/javascript" src="${ctx}/scripts/application.js"></script>
+
+    <link rel="stylesheet" type="text/css"
+          href="${ctx}/resources/styles/deliciouslyblue/theme.css" title="default" />
+    <link rel="alternate stylesheet" type="text/css"
+          href="${ctx}/resources/styles/deliciouslygreen/theme.css" title="green" />
+
     <sm:head/>
 </head>
 
@@ -23,7 +24,7 @@
 
         <div id="branding">
             <a href="http://www.springframework.org" title="Spring - java/j2ee Application Framework">
-                <img src="${ctx}/images/powered-by-spring.png" width="125" height="66" alt="Spring Framework"/></a>
+                <img src="${ctx}/resources/images/powered-by-spring.png" width="125" height="66" alt="Spring Framework"/></a>
         </div>
 
         <p>Spring 3.1: Profiles, Caching, Servlet 3 and much more...</p>
@@ -49,8 +50,8 @@
                 <li><a href="http://forum.springframework.org/">Spring Forums</a></li>
             </ul>
 
-            <img src="${ctx}/images/image.gif" alt="Click to Change Theme" width="150" height="112" class="right" style="margin: 10px 0 20px 0"
-                 onclick="StyleSheetSwitcher.setActive((StyleSheetSwitcher.getActive() == 'default') ? 'green' : 'default')"/>
+            <img src="${ctx}/resources/images/image.gif" alt="Click to Change Theme" width="150" height="112" class="right" style="margin: 10px 0 20px 0"
+                 id="theme-switcher"/>
         </div>
 
         <div id="nav">
@@ -72,6 +73,22 @@
 
         </p>
     </div>
+    <% if ("dev".equals(System.getProperty("spring.profiles.active"))) { %>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="${ctx}/resources/scripts/prototype.js"></script>
+    <script type="text/javascript" src="${ctx}/resources/scripts/stylesheetswitcher.js"></script>
+    <script type="text/javascript" src="${ctx}/resources/scripts/application.js"></script>
+    <script type="text/javascript">
+        window.onload = StyleSheetSwitcher.initialize();
+        jQuery('#theme-switcher').on('click', function() {
+            StyleSheetSwitcher.setActive((StyleSheetSwitcher.getActive() == 'default') ? 'green' : 'default')
+        });
+    </script>
+    <% } else { %>
+    <script type="text/javascript" src="${ctx}/assets/scripts.js"></script>
+    <% } %>
+    <%= (request.getAttribute("scripts") != null) ? request.getAttribute("scripts") : "" %>
+   
 </div>
 </body>
 </html>

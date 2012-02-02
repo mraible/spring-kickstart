@@ -21,7 +21,7 @@ public class CustomerController {
     @Autowired
     CustomerService customerService;
 
-    @RequestMapping("/customers.*")
+    @RequestMapping("/customers")
     public String execute(ModelMap model)
     throws Exception {
         log.debug("entering 'execute' method...");

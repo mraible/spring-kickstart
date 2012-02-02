@@ -1,24 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
-            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
-    
+<beans:beans
+        xmlns="http://www.springframework.org/schema/mvc"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:context="http://www.springframework.org/schema/context"
+             xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
     <!-- View Resolver for JSPs -->
-    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
-        <property name="prefix" value="/WEB-INF/pages/"/>
-        <property name="suffix" value=".jsp"/>
-    </bean>
+    <beans:bean id="viewResolver"
+                class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <beans:property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <beans:property name="prefix" value="/WEB-INF/pages/"/>
+        <beans:property name="suffix" value=".jsp"/>
+    </beans:bean>
 
-    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
-        <property name="basename" value="messages"/>
-        <property name="useCodeAsDefaultMessage" value="true"/> 
-    </bean>
+    <beans:bean id="messageSource"
+                class="org.springframework.context.support.ResourceBundleMessageSource">
+        <beans:property name="basename" value="messages"/>
+        <beans:property name="useCodeAsDefaultMessage" value="true"/>
+    </beans:bean>
 
-    <!-- Activates mapping of @Controller -->
-    <context:component-scan base-package="spring.kickstart.web"/>
+    <context:component-scan base-package="spring.kickstart"/>
 
-    <!-- Activates @Autowired for Controllers -->
-    <context:annotation-config/>
-</beans>
+    <!-- Enables the Spring MVC @Controller programming model -->
+    <annotation-driven/>
+
+    <resources mapping="/resources/**" location="/resources/"/>
+
+    <!-- Maps '/' requests to the 'index' view -->
+    <view-controller path="/" view-name="index"/>
+
+</beans:beans>

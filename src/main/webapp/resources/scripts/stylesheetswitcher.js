@@ -19,8 +19,7 @@ var StyleSheetSwitcher = {
 	setActive: function(title) {
 		$$("link").each(function(link) {
 			if (link && link.getAttribute("rel").indexOf("style") != -1 && link.getAttribute("title")) {
-				link.disabled = true;
-				if (link.getAttribute("title") == title) link.disabled = false;
+				link.disabled = link.getAttribute("title") != title;
 			}
 		});
 	},
@@ -71,4 +70,4 @@ var Cookies = {
 	exists: function(name) {
 		return this.read(name) !== "";
 	}
-}
+};

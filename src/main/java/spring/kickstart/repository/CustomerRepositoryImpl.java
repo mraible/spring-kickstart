@@ -5,7 +5,6 @@ import spring.kickstart.domain.Customer;
 import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;

@@ -1,33 +1,33 @@
 package spring.kickstart.web;
 
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mock.web.MockHttpServletRequest;
-import org.springframework.mock.web.MockHttpServletResponse;
-import org.springframework.test.AbstractDependencyInjectionSpringContextTests;
-import org.springframework.validation.BindException;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.DataBinder;
-import org.springframework.validation.Errors;
-import org.springframework.web.servlet.ModelAndView;
 import spring.kickstart.domain.Customer;
 import spring.kickstart.domain.CustomerService;
 import spring.kickstart.domain.CustomerServiceMock;
 
 import java.util.List;
 
+import static org.junit.Assert.*;
+
 /**
  * @author mraible
  */
-public class CustomerFormControllerTest extends AbstractDependencyInjectionSpringContextTests {
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"/repository-config.xml"})
+public class CustomerFormControllerTest {
+    @Autowired
+    CustomerService customerService;
+    @Autowired
     private CustomerFormController form;
 
-    public void setCustomerFormController(CustomerFormController form) {
-        this.form = form;
-    }
-
-    protected String[] getConfigLocations() {
-        return new String[]{"file:**/kickstart-servlet.xml", "repository-mock-config.xml"};
-    }
-
+    @Test
     public void testEdit() throws Exception {
         form = new CustomerFormController();
         form.customerService = new CustomerServiceMock();
@@ -39,10 +39,10 @@ public class CustomerFormControllerTest extends AbstractDependencyInjectionSprin
         assertEquals(new Long(1), customer.getId());
     }
 
+    @Test
     public void testAddNewCustomer() throws Exception {
-        CustomerService service = (CustomerService) applicationContext.getBean("customerService");
-        List customers = service.getListOfCustomers();
-        
+        List customers = customerService.getListOfCustomers();
+
         Customer customer = new Customer();
         customer.setName("Chipotle");
 
@@ -52,6 +52,6 @@ public class CustomerFormControllerTest extends AbstractDependencyInjectionSprin
         // assert no errors
         assertFalse(errors.hasErrors());
 
-        assertEquals(service.getListOfCustomers().size() - 1, customers.size());
+        assertEquals(customerService.getListOfCustomers().size() - 1, customers.size());
     }
 }

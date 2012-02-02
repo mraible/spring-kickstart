@@ -12,14 +12,14 @@
         <sourceRoots>
           <root url="file://$MODULE_DIR$/src/main/java" />
           <root url="file://$MODULE_DIR$/src/main/resources" />
-          <root url="file://$MODULE_DIR$/src/test/java" />
-          <root url="file://$MODULE_DIR$/src/test/resources" />
+          <root url="file://$MODULE_DIR$/target/generated-sources/annotations" />
         </sourceRoots>
       </configuration>
     </facet>
     <facet type="Spring" name="Spring">
       <configuration>
-        <fileset id="web: application context" profiles="dev" autodetected="true" />
+        <fileset id="MVC dispatcher servlet context" profiles="" autodetected="true" />
+        <fileset id="web: application context" profiles="test" autodetected="true" />
         <fileset id="web: kickstart servlet context" profiles="" autodetected="true" />
       </configuration>
     </facet>
@@ -35,9 +35,6 @@
       <sourceFolder url="file://$MODULE_DIR$/target/generated-sources/test-annotations" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/target/generated-sources/annotations" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/target/classes" />
-      <excludeFolder url="file://$MODULE_DIR$/target/kickstart" />
-      <excludeFolder url="file://$MODULE_DIR$/target/maven-archiver" />
-      <excludeFolder url="file://$MODULE_DIR$/target/selenium" />
       <excludeFolder url="file://$MODULE_DIR$/target/surefire" />
       <excludeFolder url="file://$MODULE_DIR$/target/surefire-reports" />
       <excludeFolder url="file://$MODULE_DIR$/target/test-classes" />
@@ -45,6 +42,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="jquery-1.7.1.min" level="application" />
     <orderEntry type="library" name="Maven: org.springframework:spring-orm:3.1.0.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-beans:3.1.0.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-core:3.1.0.RELEASE" level="project" />
@@ -78,12 +76,20 @@
     <orderEntry type="library" name="Maven: com.lowagie:itext:1.3" level="project" />
     <orderEntry type="library" name="Maven: commons-beanutils:commons-beanutils:1.7.0" level="project" />
     <orderEntry type="library" name="Maven: log4j:log4j:1.2.13" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: javax.servlet:servlet-api:2.4" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.glassfish:javax.servlet:3.0" level="project" />
     <orderEntry type="library" name="Maven: javax.servlet:jstl:1.1.2" level="project" />
     <orderEntry type="library" name="Maven: taglibs:standard:1.1.2" level="project" />
     <orderEntry type="library" name="Maven: opensymphony:sitemesh:2.2.1" level="project" />
+    <orderEntry type="library" name="Maven: ro.isdc.wro4j:wro4j-core:1.4.3" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.commons:commons-lang3:3.0.1" level="project" />
+    <orderEntry type="library" name="Maven: commons-io:commons-io:2.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.8.2" level="project" />
+    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.6.2" level="project" />
+    <orderEntry type="library" name="Maven: org.slf4j:slf4j-log4j12:1.6.2" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: jmock:jmock:1.1.0" level="project" />
+    <orderEntry type="library" name="Maven: commons-dbcp:commons-dbcp:1.4" level="project" />
+    <orderEntry type="library" name="Maven: commons-pool:commons-pool:1.5.4" level="project" />
+    <orderEntry type="library" name="Maven: mysql:mysql-connector-java:5.1.18" level="project" />
   </component>
 </module>
 

@@ -62,21 +62,18 @@
     </c:if>
     <li class="buttonBar bottom">
         <input type="submit" class="button" name="save" value="Save"/>
-      <c:if test="${not empty param.id}">
-        <input type="submit" class="button" name="delete" value="Delete"/>
-      </c:if>
       	<input type="submit" class="button" name="cancel" value="Cancel" onclick="bCancel=true"/>
     </li>
 </ul>
 </form:form>
 
+<c:set var="scripts" scope="request">
 <script type="text/javascript">
-    Form.focusFirstElement($('customer'));
-    Calendar.setup(
-    {
+    jQuery("#name").focus();
+    Calendar.setup({
         inputField  : "customerSince", // id of the input field
         ifFormat    : "%m/%d/%Y",      // the date format
         button      : "cal"    // id of the button
-    }
-    );
+    });
 </script>
+</c:set>

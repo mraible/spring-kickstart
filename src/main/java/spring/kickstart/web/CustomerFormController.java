@@ -72,6 +72,6 @@ public class CustomerFormController {
             }
         }
 
-        return "redirect:customers.htm";
+        return "redirect:customers";
     }
 }

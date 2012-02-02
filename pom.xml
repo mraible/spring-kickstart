@@ -99,10 +99,12 @@
             <artifactId>log4j</artifactId>
             <version>1.2.13</version>
         </dependency>
+        <!-- Servlet 3.0 -->
+        <!-- http://stackoverflow.com/questions/1979957/maven-dependency-for-servlet-3-0-api -->
         <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
-            <version>2.4</version>
+            <groupId>org.glassfish</groupId>
+            <artifactId>javax.servlet</artifactId>
+            <version>3.0</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -120,6 +122,11 @@
             <artifactId>sitemesh</artifactId>
             <version>2.2.1</version>
         </dependency>
+        <dependency>
+            <groupId>ro.isdc.wro4j</groupId>
+            <artifactId>wro4j-core</artifactId>
+            <version>1.4.3</version>
+        </dependency>
 
         <!-- testing dependencies -->
         <dependency>
@@ -135,5 +142,16 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- For prod profile -->
+        <dependency>
+            <groupId>commons-dbcp</groupId>
+            <artifactId>commons-dbcp</artifactId>
+            <version>1.4</version>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.18</version>
+        </dependency>
     </dependencies>
 </project>
